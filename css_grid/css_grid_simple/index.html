@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Based on: "CSS Grid Tutorial | CSS Grid Crash Course" by Dev Ed (https://www.youtube.com/watch?v=EFafSYg-PkI) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS GRID</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 5px 5px;
+        }
+        .gallery img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resize the window to see CSS Grid in action</h1>
+    <div class="gallery">
+        <img src="https://placeimg.com/400/300/animals" alt="" srcset="">
+        <img src="https://placeimg.com/400/300/arch" alt="" srcset="">
+        <img src="https://placeimg.com/400/300/nature" alt="" srcset="">
+        <img src="https://placeimg.com/400/300/people" alt="" srcset="">
+        <img src="https://placeimg.com/400/300/tech" alt="" srcset="">
+    </div>
+</body>
+</html>
