@@ -1,0 +1,3 @@
+- Unit test examples
+- Example from LinkedIn Learning: "JavaScript: Test-Driven Development (ES6)" by Shaun Wassell (https://www.linkedin.com/learning/javascript-test-driven-development-es6/)
+- Run "npm install" and then either "npm run test", "npm run test:watch", or "npm run coverage".
