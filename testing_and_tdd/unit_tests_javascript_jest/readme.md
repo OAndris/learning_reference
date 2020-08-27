@@ -4,9 +4,9 @@ This example covers unit testing in JavaScript with Jest, including testing sync
 
 # Usage:
 
-"npm install"
-"npm test" (to execute all tests in watch mode with "jest --watch ./*.test.js")
-"npm test -- --coverage" (to execute all tests and also generate a coverage report)
+- `npm install`
+- `npm test` (to execute all tests in watch mode with `jest --watch ./*.test.js`)
+- `npm test -- --coverage` (to execute all tests and also generate a coverage report)
 
 # Source:
 
