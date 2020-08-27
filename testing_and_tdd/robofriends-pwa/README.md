@@ -2,7 +2,7 @@
 
 **About:**
 
-This example covers React component tests using Enzyme, including mocking, simulating a IO event, and snapshot testing.
+This example covers React component tests using Enzyme, including mocking, simulating an IO event, and snapshot testing.
 
 **Usage:**
 
