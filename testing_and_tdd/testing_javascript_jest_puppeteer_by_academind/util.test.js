@@ -34,7 +34,7 @@ test("should create an element with text and correct class", async () => {
   );
   const page = await browser.newPage();
   await page.goto(
-    "http://127.0.0.1:5500/testing_and_tdd/testing_javascript_academind/index.html"
+    "http://127.0.0.1:5500/testing_and_tdd/testing_javascript_jest_puppeteer_by_academind/index.html"
   );
 
   await page.click("input#name");
