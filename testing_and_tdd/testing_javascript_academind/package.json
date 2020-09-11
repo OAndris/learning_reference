@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack app.js --mode development --watch",
-    "test": "jest --watch"
+    "test": "jest --runInBand --detectOpenHandles",
+    "test-watch": "jest --watch --runInBand --detectOpenHandles"
   },
   "keywords": [
     "js",
@@ -23,6 +24,7 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^26.4.2",
+    "puppeteer": "^5.3.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }
