@@ -1,4 +1,4 @@
-# testing_javascript_academind
+# testing_javascript_jest_puppeteer_by_academind
 
 **About:**
 
