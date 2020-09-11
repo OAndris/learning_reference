@@ -2,13 +2,13 @@
 
 **About:**
 
-<!-- This example covers unit testing in JavaScript with Jest, including testing synchronous and asynchronous functions, as well as using mocks and spies. -->
+This example covers unit testing, integration testing, and end-to-end testing (UI testing) in JavaScript, using Jest (as a test runner and assertion library) and Puppeteer (as an API to control a headless or full Chrome/Chromium browser for E2E testing).
 
 **Usage:**
 
-<!-- - `npm install`
-- `npm test` (to execute all tests in watch mode with `jest --watch ./*.test.js`)
-- `npm test -- --coverage` (to execute all tests and also generate a coverage report) -->
+- `npm install`
+- `npm test` (to execute all tests)
+- `npm run test-watch` (to execute all tests in watch mode)
 
 **Source:**
 
