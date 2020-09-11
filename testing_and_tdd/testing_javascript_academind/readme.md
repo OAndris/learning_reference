@@ -2,7 +2,7 @@
 
 **About:**
 
-This example covers unit testing, integration testing, and end-to-end testing (UI testing) in JavaScript, using Jest (as a test runner and assertion library) and Puppeteer (as an API to control a headless or full Chrome/Chromium browser for E2E testing).
+This example covers **unit testing**, **integration testing**, and **end-to-end testing** (UI testing) in JavaScript, using **Jest** (as a test runner and assertion library) and **Puppeteer** (as an API to control a headless or full Chrome/Chromium browser for E2E testing).
 
 **Usage:**
 
