@@ -1,3 +1,5 @@
+alert(Cypress.env("MY_ENV_VARIABLE"));
+
 describe("Basic page interactions", () => {
   beforeEach(() => {
     cy.visit("/example-4");

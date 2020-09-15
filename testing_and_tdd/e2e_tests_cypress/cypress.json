@@ -1,3 +1,6 @@
 {
-  "baseUrl": "http://localhost:3000"
+  "baseUrl": "http://localhost:3000",
+  "env": {
+    "MY_ENV_VARIABLE": "Hello. Environmental variables can be defined here in 'cypress.json', or in a separate 'cypress.env.json' file."
+  }
 }
