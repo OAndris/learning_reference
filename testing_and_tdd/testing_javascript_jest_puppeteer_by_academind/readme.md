@@ -7,6 +7,7 @@ This example covers **unit testing**, **integration testing**, and **end-to-end 
 **Usage:**
 
 - `npm install`
+- Open `index.html` with Live Server (required for the E2E test)
 - `npm test` (to execute all tests)
 - `npm run test-watch` (to execute all tests in watch mode)
 
