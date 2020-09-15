@@ -1,6 +1,6 @@
 describe("Text box with max characters", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/example-3");
+    cy.visit("/example-3");
     cy.get("[data-cy='last-name-chars-left-count']").as("charsLeftSpan"); // Selectors can be referenced as Cypress 'aliases' (other options would be to use them directly or reference the string as JS variables)
     cy.get("[data-cy='input-last-name']").as("charInput");
   });
