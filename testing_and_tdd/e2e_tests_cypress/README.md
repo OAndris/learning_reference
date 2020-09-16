@@ -46,10 +46,11 @@ Example taken from the LinkedIn Learning course named "End-to-End JavaScript Tes
 
 **A few useful tricks:**
 
-- since both HTML and CSS are subject to change, it is recommended to use the `data-cy` tags on the elements required for testing. This enables using selectors that are dedicated to testing and thus are less likely to change. Example: `cy.get("[data-cy=box-1-items-list] > :nth-child(2)").dblclick();`
-- use the `beforeEach` hook function (inside a test suite (`describe(...)`)) to execute certain steps before each test (such as `cy.visit("/example-4");`)
-- the base URL of the target application can be outsourced to `cypress.json` as the following example key-value pair: `"baseUrl": "http://localhost:3000"`
-- aliasing can be used to reduce repetition of selectors. Example: `cy.get("[data-cy='input-last-name']").as("charInput");`. Then use it as `cy.get("@charInput").type("hello");`.
+- Since both HTML and CSS are subject to change, it is recommended to use the `data-cy` tags on the elements required for testing. This enables using selectors that are dedicated to testing and thus are less likely to change. Example: `cy.get("[data-cy=box-1-items-list] > :nth-child(2)").dblclick();`
+- Use the `beforeEach` hook function (inside a test suite (`describe(...)`)) to execute certain steps before each test (such as `cy.visit("/example-4");`)
+- The base URL of the target application can be outsourced to `cypress.json` as the following example key-value pair: `"baseUrl": "http://localhost:3000"`
+- Aliasing can be used to reduce repetition of selectors. Example: `cy.get("[data-cy='input-last-name']").as("charInput");`. Then use it as `cy.get("@charInput").type("hello");`.
+- Debugging the tests is possible by adding the `.debug()` method (example: `cy.get("[data-cy=box-4-items-list] > :nth-child(2)").trigger("mouseover").debug();`) and then executing the test and opening the DevTools inside the browser. Once the debug breakpoint is reached, the `subject` variable is also available for inspection.
 
 **Cypress.io also wraps around Sinon.js:**
 
@@ -84,3 +85,7 @@ It allows us to create stubs (to replace methods) and spies (to watch methods an
 
 - for a single file by starting it with `/// <reference types="Cypress" />`
 - for a whole project by creating a `jsconfig.json` file containing `{"include": ["./node_modules/cypress", "cypress/**/*.js"]}`
+
+**Useful links:**
+
+- https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
