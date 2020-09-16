@@ -44,6 +44,13 @@ Example taken from the LinkedIn Learning course named "End-to-End JavaScript Tes
         cy.location('pathname').should('eq', '/board')
     })
 
+**A few useful tricks:**
+
+- since both HTML and CSS are subject to change, it is recommended to use the `data-cy` tags on the elements required for testing. This enables using selectors that are dedicated to testing and thus are less likely to change. Example: `cy.get("[data-cy=box-1-items-list] > :nth-child(2)").dblclick();`
+- use the `beforeEach` hook function (inside a test suite (`describe(...)`)) to execute certain steps before each test (such as `cy.visit("/example-4");`)
+- the base URL of the target application can be outsourced to `cypress.json` as the following example key-value pair: `"baseUrl": "http://localhost:3000"`
+- aliasing can be used to reduce repetition of selectors. Example: `cy.get("[data-cy='input-last-name']").as("charInput");`. Then use it as `cy.get("@charInput").type("hello");`.
+
 **Cypress.io also wraps around Sinon.js:**
 
 It allows us to create stubs (to replace methods) and spies (to watch methods and provide us with information for making assertions e.g. about how many times it was called, or what arguments it was called with), such as:
