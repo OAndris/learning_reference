@@ -13,54 +13,49 @@ This example covers **end-to-end testing** (UI testing) in JavaScript, using **C
 
 **Source:**
 
-Example taken from the Youtube video named "End-to-End JavaScript Testing with Cypress.io" by Shaun Wassell. Link: https://www.linkedin.com/learning/end-to-end-javascript-testing-with-cypress-io/
+Example taken from the LinkedIn Learning course named "End-to-End JavaScript Testing with Cypress.io" by Shaun Wassell. Link: https://www.linkedin.com/learning/end-to-end-javascript-testing-with-cypress-io/
 
 **A few examples:**
 
 `cy.get('button').click().should('have.class', 'active')`
+
 `cy.request('/users/1').its('body').should('deep.eql', { name: 'Amir' })`
 
-`
-it('send email with contact form', () => {
+    it('send email with contact form', () => {
+        cy.get('#name-input').type('Amir')
+        cy.get('#email-input').type('amir@cypress.io')
+        cy.get('form').submit()
+        cy.get('#success-message').should('be.visible')
+    })
 
-    cy.get('#name-input').type('Amir')
-    cy.get('#email-input').type('amir@cypress.io')
-    cy.get('form').submit()
-    cy.get('#success-message').should('be.visible')
+    it('signup and login user', () => {
+        cy.visit('http://localhost:8080/signup')
+        cy.get('input[name="email"]').type('amir@cypress.io')
+        cy.get('input[name="password"]').type('1234')
+        cy.get('input[name="confirm-password"]').type('1234')
+        cy.get('#signup-button').click()
 
-})
+        cy.location('pathname').should('eq', '/login')
 
-it('signup and login user', () => {
+        cy.get('input[name="email"]').type('amir@cypress.io')
+        cy.get('input[name="password"]').type('1234')
+        cy.get('#login-button').click()
 
-    cy.visit('http://localhost:8080/signup')
-    cy.get('input[name="email"]').type('amir@cypress.io')
-    cy.get('input[name="password"]').type('1234')
-    cy.get('input[name="confirm-password"]').type('1234')
-    cy.get('#signup-button').click()
-
-    cy.location('pathname').should('eq', '/login')
-
-    cy.get('input[name="email"]').type('amir@cypress.io')
-    cy.get('input[name="password"]').type('1234')
-    cy.get('#login-button').click()
-
-    cy.location('pathname').should('eq', '/board')
-
-})
-`
+        cy.location('pathname').should('eq', '/board')
+    })
 
 **Cypress.io also wraps around Sinon.js**
+
 It allows us to create stubs (to replace methods) and spies (to watch methods and provide us with information for making assertions e.g. about how many times it was called, or what arguments it was called with), such as:
-`
-import { api } from './my-api';
 
-cy.stub(api, 'getUser').returns({ name: 'Bill' });
-cy.stub(api, 'getUser').resolves({ name: 'Bill' });
-cy.stub(api, 'getUser').reject();
+    import { api } from './my-api';
 
-const mySpy = cy.spy(api, 'getUser');
-expect(mySpy).to.be.called;
-`
+    cy.stub(api, 'getUser').returns({ name: 'Bill' });
+    cy.stub(api, 'getUser').resolves({ name: 'Bill' });
+    cy.stub(api, 'getUser').reject();
+
+    const mySpy = cy.spy(api, 'getUser');
+    expect(mySpy).to.be.called;
 
 Environmental variables can be defined in 'cypress.json', or in a separate 'cypress.env.json' file.
 
