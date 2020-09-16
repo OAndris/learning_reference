@@ -44,7 +44,7 @@ Example taken from the LinkedIn Learning course named "End-to-End JavaScript Tes
         cy.location('pathname').should('eq', '/board')
     })
 
-**Cypress.io also wraps around Sinon.js**
+**Cypress.io also wraps around Sinon.js:**
 
 It allows us to create stubs (to replace methods) and spies (to watch methods and provide us with information for making assertions e.g. about how many times it was called, or what arguments it was called with), such as:
 
@@ -57,7 +57,10 @@ It allows us to create stubs (to replace methods) and spies (to watch methods an
     const mySpy = cy.spy(api, 'getUser');
     expect(mySpy).to.be.called;
 
-Environmental variables can be defined in 'cypress.json', or in a separate 'cypress.env.json' file.
+**Environmental variables:**
+
+- can be defined in `cypress.json`, such as `{"env": {"MY_ENV_VARIAbLE": "This is my environmental variable."}}` and then obtained by `Cypress.env('MY_ENV_VARIABLE')`
+- alternatively, they can also be defined in a separate `cypress.env.json` file
 
 **Additional useful methods:**
 
