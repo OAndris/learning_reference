@@ -1,7 +1,5 @@
 # decorators
 
-**About:**
-
 A **decorator** in Python is a special type of function that returns a wrapper function (it is a form of metaprogramming).
 
 A decorator is a function that takes a function as input, and returns a wrapped version of the input function. It just implements and returns another function, which actually calls the input function, plus decorates it with any other tasks we have immplemented.
@@ -9,11 +7,3 @@ A decorator is a function that takes a function as input, and returns a wrapped 
 In Python, everything is an object. Functions are also objects, and thus:
 - functions can also be assigned to variables
 - functions might as well be taken as input and/or returned as output by other functions.
-
-**Usage:**
-
-Run `python inclusive_range.py` in the terminal.
-
-**Source:**
-
-Example taken from the LinkedIn Learning course named "Python Essential Training" by Bill Weinman. Link: https://www.linkedin.com/learning/python-essential-training-2/decorators
