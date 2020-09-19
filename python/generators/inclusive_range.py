@@ -1,3 +1,4 @@
+# Example taken from the LinkedIn Learning course named "Python Essential Training" by Bill Weinman. Link: https://www.linkedin.com/learning/python-essential-training-2/generators
 
 def main():
     for i in inclusive_range(25):
