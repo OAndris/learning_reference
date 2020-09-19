@@ -1,4 +1,4 @@
-# python_generators
+# generators
 
 **About:**
 
