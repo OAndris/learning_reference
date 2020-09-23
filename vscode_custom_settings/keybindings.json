@@ -1,0 +1,18 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    // Toggle comment:
+    {
+        "key": "ctrl+1",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Toggle between terminal and editor focus
+    { "key": "alt+q", "command": "workbench.action.terminal.focus"},
+    { "key": "alt+q", "command": "workbench.action.focusActiveEditorGroup", "when": "terminalFocus"},
+    // Clear terminal (if active):
+    {
+        "key": "ctrl+r",
+        "command": "workbench.action.terminal.clear",
+        "when": "terminalFocus"
+    }
+]
