@@ -32,7 +32,7 @@ def fun(x, *args, **kwargs):
     print(f'First argument: {x}. Args: {args}. Kwargs: {kwargs}.')
 
 
-def do_operation(operator, *args, start_from=0):
+def do_operation_on_any_number_of_numbers(operator, *args, start_from=0):
     result = start_from
     if operator == '+':
         for arg in args:
@@ -47,6 +47,15 @@ def do_operation(operator, *args, start_from=0):
         print(f'Unknown operator "{operator}".', end=' ')
     print(f'Result is {result}')
     return result
+
+
+def strictly_separated_positional_and_keyword_arguments(positional1, positional2, *, keyword1=None):
+    """
+    NOTE: if the '*' (asterisk) character is placed after the last positional and before the first keyword argument,
+    then the keyword has to be explicitly defined when calling the function.
+    It can be used to force the users of the function to define the exact key-value pairs, and reduce errors.
+    """
+    print(positional1, positional2, keyword1)
 
 
 def main():
@@ -71,15 +80,18 @@ def main():
     fun('Merlin', *args, **kwargs)
     print()
 
-    do_operation('+', *nums)
-    do_operation('-', *nums)
-    do_operation('*', *nums)
-    do_operation('/', *nums)
-    do_operation('+', *nums, start_from=10)
-    do_operation('+', 1, 5)
-    do_operation('+', 1, 5, 10)
-    do_operation('+', 1, 5, 10, start_from=10)
+    do_operation_on_any_number_of_numbers('+', *nums)
+    do_operation_on_any_number_of_numbers('-', *nums)
+    do_operation_on_any_number_of_numbers('*', *nums)
+    do_operation_on_any_number_of_numbers('/', *nums)
+    do_operation_on_any_number_of_numbers('+', *nums, start_from=10)
+    do_operation_on_any_number_of_numbers('+', 1, 5)
+    do_operation_on_any_number_of_numbers('+', 1, 5, 10)
+    do_operation_on_any_number_of_numbers('+', 1, 5, 10, start_from=10)
     print()
+
+    strictly_separated_positional_and_keyword_arguments(1, 5)
+    strictly_separated_positional_and_keyword_arguments(1, 5, keyword1=10)
 
 
 if __name__ == '__main__':
