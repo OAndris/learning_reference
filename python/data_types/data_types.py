@@ -32,6 +32,12 @@ data_types_in_python = {
             'dict():      Mutable,   unordered mapping of key-value pairs',
             'set():       Mutable,   unordered collection of unique elements',
             'frozenset(): Immutable, unordered collection of unique elements',
+
+            'collections.namedtuple():  Tuple with named fields',
+            'collections.OrderedDict(): Dictionairy with special properties',
+            'collections.defaultdict(): Dictionairy with special properties',
+            'collections.Counter():     Counts distinct values',
+            'collections.deque():       Double-ended list object,',
         ],
     ],
 }
