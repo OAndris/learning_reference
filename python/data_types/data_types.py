@@ -13,12 +13,21 @@ data_types_in_python = {
         'set': {0, 1, 'string', True, False, None},
         'frozenset': frozenset((0, 1, 'string', True, False, None)),
     },
-    'data_structures_from_packages': [
+    'info_about_data_structures': [
+        'list():      Mutable,   ordered sequence of elements',
+        'tuple():     Immutable, ordered sequence of elements',
+        'dict():      Mutable,   unordered mapping of key-value pairs',
+        'set():       Mutable,   unordered collection of unique elements',
+        'frozenset(): Immutable, unordered collection of unique elements',
+        '',
+        'collections.namedtuple():  Tuple with named fields',
+        'collections.defaultdict(): Dictionary that creates the field we are trying to access if it does not exist',
+        'collections.OrderedDict(): Dictionary with special properties',
+        'collections.Counter():     Counts distinct values',
+        'collections.deque():       Double-ended list object,',
         'pandas.DataFrame',
-        'collections.OrderedDict',
-        'collections.namedtuple',
         'typing.NamedTuple',
-    ],
+        ],
     'additional_info': [
         'In Python, everything is an object. Functions can also be stored in variables, passed as input to functions, and returned by functions.'
         'Primitives are passed by value',
@@ -26,19 +35,6 @@ data_types_in_python = {
         'Use "type()" to check the type of a variable',
         'Use "==" to check equality, "id()" to check identity',
         'Prefer tuples over lists when possible. They are immutable (less error-prone), and they are also faster and consume less memory.',
-        [
-            'list():      Mutable,   ordered sequence of elements',
-            'tuple():     Immutable, ordered sequence of elements',
-            'dict():      Mutable,   unordered mapping of key-value pairs',
-            'set():       Mutable,   unordered collection of unique elements',
-            'frozenset(): Immutable, unordered collection of unique elements',
-
-            'collections.namedtuple():  Tuple with named fields',
-            'collections.OrderedDict(): Dictionairy with special properties',
-            'collections.defaultdict(): Dictionairy with special properties',
-            'collections.Counter():     Counts distinct values',
-            'collections.deque():       Double-ended list object,',
-        ],
     ],
 }
 
