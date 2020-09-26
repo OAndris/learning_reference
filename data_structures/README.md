@@ -8,7 +8,7 @@
 - Trees
 - Hash tables
 
-## Arrays:
+## Array:
 
 - Collection of elements identified by index or key
 - Array operations:
@@ -22,15 +22,15 @@
 - Collection of data elements, called nodes
 - Each node contains whatever data the application needs
 - Each node contains a field that references the next node in the list (the last element references null, indicating the end of the list)
-- Each node might also contain a field that references the previous node in the list ("doubly linked list" instead of "singly linked list")
+- Each node might also contain a field that references the previous node in the list (*"doubly linked list"* instead of *"singly linked list"*)
 - Benefits:
     - It is fast and easy to add and remove elements from the linked list 
-    - Underlying memory doesn't need to be reorganized (because the individual nodes don't have to be stored contiguously, like they do in an array)
+    - Underlying memory doesn't need to be reorganized (because the individual nodes don't have to be stored contiguously, as opposed to the elements in an array)
 - Drawbacks:
     - Can't do constant-time random item access of any item (arrays can)
     - Item lookup is linear in time complexity: O(n)
-    
-## Stacks and Queues:
+
+## Stack and Queue:
 
 - **Stack:**
     - A collection that supports `push` and `pop` operations.
@@ -54,6 +54,14 @@
         - Message processing
     - In Python, lists aren't queues and thus it is inefficient to use them as if they were. E.g. removing an item from the start would be O(n) time complexity, since all the subsequent items have to be shifted down
 
+## Hash Table:
+
+- An associative array. Also called a "dictionary" in some languages.
+- It is a data structure that maps keys to their associated values (using a hash function, that also resolves potential collisions)
+- Key-value mappings are unique
+- Hash tables are typically very fast
+- They are ideal for larger datasets. For small datasets, arrays or linked lists are usually more efficient
+- Hash tables don't order entries in a predictable way (the data might be spread out randomly in the system's memory)
+
 ## Source / further info:
 - https://www.linkedin.com/learning/programming-foundations-algorithms
-
