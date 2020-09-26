@@ -19,7 +19,7 @@
     - **O(1)** or **Constant time** (e.g. looking up a single element in an array)
     - **O(log n)** or **Logarithmic** (e.g. finding an item in a sorted array with a binary search)
     - **O(n)** or **Linear time** (e.g. searching an unsorted array for a specific value)
-    - **O(n*log n)** or **Log-linear** (e.g. complex sorting algorithms like heap sort and merge sort)
+    - **O(n log n)** or **Log-linear** (e.g. complex sorting algorithms like heap sort and merge sort)
     - **O(n^2)** or **Quadratic** (e.g. simple sorting algorithms, such as bubble sort, selection sort, and insertion sort)
 
 ## Considerations:
@@ -75,6 +75,18 @@
             - Recursively call the quick sort algorithm on both the left array and right array until we can no longer split the arrays (where each array has just one item)
     - etc.
 - **Search algorithms.** Find specific data in a structure
+    - **Sequential Search:**
+        - Can be used for searching for an item in an unordered list
+        - It is typically quite inefficient, having a linear time complexity (**O(n)**)
+    - **Binary Search:**
+        - Ordered lists can be searched more efficiently than unordered lists, with a logarithmic time complexity (**O(log n)**)
+        - Process:
+            - Given a sorted array, take the first index and last index
+            - Calculate the index of the element in the middle (round down in case of an uneven division)
+            - Check if the value at the midpoint is the value we are searching for. Return if it is, otherwise continue with the next step.
+            - If the searched value is higher than the value at the midpoint, then all elements below the midpoint can be ignored. The midpoint becomes the new lower index. If it is lower, then the other way around, the midpoint becomes the new upper index.
+            - Calculate the new midpoint.
+            - Continue until the searched element is found.
 - **Computational algorithms.** Given one set of data, calculate another (e.g. check if a given number is prime)
 - **Collection algorithms.** Work with collections of data (count specific items, navigate among data elements, filter out unwanted data, etc.)
 
