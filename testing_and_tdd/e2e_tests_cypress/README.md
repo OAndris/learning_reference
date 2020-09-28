@@ -89,3 +89,4 @@ It allows us to create stubs (to replace methods) and spies (to watch methods an
 **Useful links:**
 
 - https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
+- [Painless Testing for React Applications with Cypress](https://www.youtube.com/watch?v=lgurVvQsOTY) by Boston React (Youtube)
