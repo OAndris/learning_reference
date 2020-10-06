@@ -4,6 +4,30 @@
 - **Distributed Version Control** (Local Repository and Remote Repository)
 - **Three Tree Acrhitecture** (Working Directory, Staging Area, Repository)
 
+## Initialize a repository
+Clone an existing repository:
+```
+git clone https://github.com/OAndris/react-packages-demo.git
+```
+
+Create a new repository on the command line:
+```
+echo "# my-new-repo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/OAndris/my-new-repo.git
+git push -u origin main
+```
+
+Or push an existing repository from the command line:
+```
+git remote add origin https://github.com/OAndris/my-new-repo.git
+git branch -M main
+git push -u origin main
+```
+
 ## A basic Git workflow
 
 `git checkout -B my_branch` (create a new branch and switch to it. Alternatively, `git branch my_branch` creates and `git checkout my_branch` switches to it)
@@ -27,6 +51,10 @@
 `git branch -d my_branch` (delete branch locally - only works if the branch has already been pushed and merged with the remote branch)
 
 `git push origin --delete my_branch` (delete branch remotely)
+
+---
+---
+
 
 ## Git commands
 
