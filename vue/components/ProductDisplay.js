@@ -51,6 +51,8 @@ app.component('product-display', {
                     <p v-if="onSale">{{ onSale }}</p>
                 </div>
             </div>
+            <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+            <review-form @review-submitted="addReview"></review-form>
         </div>
         `,
     data() {
@@ -75,6 +77,7 @@ app.component('product-display', {
                     onSale: false,
                 },
             ],
+            reviews: [],
         };
     },
     computed: {
@@ -106,6 +109,9 @@ app.component('product-display', {
         },
         removeFromCart() {
             this.$emit('remove-from-cart', this.variants[this.selectedVariant].id);
+        },
+        addReview(productReview) {
+            this.reviews.push(productReview);
         },
     },
 });
