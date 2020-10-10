@@ -40,6 +40,14 @@ app.component('product-display', {
                     >
                         Add to Cart
                     </button>
+                    <button
+                        class="button"
+                        :class="{ disabledButton: quantity === 0 }"
+                        :disabled="quantity === 0"
+                        @click="removeFromCart"
+                    >
+                        Remove from Cart
+                    </button>
                     <p v-if="onSale">{{ onSale }}</p>
                 </div>
             </div>
@@ -63,7 +71,7 @@ app.component('product-display', {
                     id: 2235,
                     color: 'blue',
                     image: './assets/images/socks_blue.jpg',
-                    quantity: 0,
+                    quantity: 1,
                     onSale: false,
                 },
             ],
@@ -80,9 +88,7 @@ app.component('product-display', {
             return this.variants[this.selectedVariant].quantity;
         },
         onSale() {
-            return this.variants[this.selectedVariant].onSale
-                ? `${this.title} is on sale!`
-                : '';
+            return this.variants[this.selectedVariant].onSale ? `${this.title} is on sale!` : '';
         },
         shipping() {
             if (this.premium) {
@@ -92,11 +98,14 @@ app.component('product-display', {
         },
     },
     methods: {
-        addToCart() {
-            this.cart += 1;
-        },
         updateVariant(index) {
             this.selectedVariant = index;
+        },
+        addToCart() {
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].id);
+        },
+        removeFromCart() {
+            this.$emit('remove-from-cart', this.variants[this.selectedVariant].id);
         },
     },
 });
