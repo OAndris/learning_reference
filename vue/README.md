@@ -20,7 +20,7 @@ The core library is focused on the view layer only, but Vue is also capable of p
 2. Create a JavaScript file that instantiates a Vue application and import it inside index.html. Example:
 
     ```js
-    // index.js
+    // main.js
     const app = Vue.createApp({
         data() {
             return {};
@@ -95,7 +95,7 @@ Directives are special HTML attributes provided by Vue. They are prefixed with "
 
     ```html
     <!-- index.html
-        - passing down "premium" defined in index.js to child component as props, using one-way binding
+        - passing down "premium" defined in main.js to child component as props, using one-way binding
         - listening to the "add-to-cart" and "remove-from-cart" events defined in (and emitted from) child component
     -->
     <product-display
@@ -125,7 +125,7 @@ Directives are special HTML attributes provided by Vue. They are prefixed with "
         },
     });
 
-    // index.js
+    // main.js
     const app = Vue.createApp({
         data() {
             return {
