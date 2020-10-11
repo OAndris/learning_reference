@@ -6,12 +6,16 @@ The core library is focused on the view layer only, but Vue is also capable of p
 
 ## Setup:
 
-1. Within index.html, import Vue (either via CDN or the downloaded file). Example:
+1. Two options:
+
+    1. Within index.html, import Vue (either via CDN or the downloaded file). Example:
 
     ```html
     <!-- index.html -->
     <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
     ```
+
+    2. Alternatively, install the Vue CLI tool with `npm install -g @vue/cli`. Then use either the CLI tool (`vue create my-app` and then `npm run serve`) or the UI that comes with it (`vue ui`) and includes analytics.
 
 2. Create a JavaScript file that instantiates a Vue application and import it inside index.html. Example:
 
@@ -176,3 +180,4 @@ Directives are special HTML attributes provided by Vue. They are prefixed with "
 -   https://v3.vuejs.org/guide/introduction
 -   https://www.vuemastery.com/courses/intro-to-vue-3
 -   [Angular vs React vs Vue [2020 Update]](https://www.youtube.com/watch?v=lYWYWyX04JI) by Academind on Youtube
+-   [Vue JS Crash Course](https://www.youtube.com/watch?v=Wy9q22isx3U) by Traversy Media on Youtube
