@@ -62,7 +62,7 @@ The core library is focused on the view layer only, but Vue is also capable of p
 
 ## Directives:
 
-Directives are used just like HTML attributes, to describe simple logic within HTML.
+Directives are special HTML attributes provided by Vue. They are prefixed with "`v-`", and they can be used to describe simple logic within HTML and apply reactive behaviour to the rendered DOM (e.g. keep an element's attribute up-to-date with a specific property of our app's instance).
 
 -   "`v-bind:`", or just "`:`" creates a **one-way binding** from the data to the template. It enables using data defined within JavaScript to be used inside HTML (also for conditionally adding classes and/or styles).
 -   "`v-model`" creates a **two-way binding** between the data and the template. It causes the data defined within JavaScript to be used inside HTML, and also update when the HTML is updated (e.g. to be used with form inputs).
