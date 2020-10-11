@@ -23,13 +23,17 @@ export default {
     },
     methods: {
         addTodo(newTodo) {
-            const { title, completed } = newTodo;
+            const { id, title, completed } = newTodo;
             axios
                 .post('https://jsonplaceholder.typicode.com/todos', {
+                    id,
                     title,
                     completed
                 })
-                .then(res => (this.todos = [...this.todos, res.data]))
+                .then(res => {
+                    res.data.id = id;
+                    this.todos = [...this.todos, res.data];
+                })
                 .catch(err => console.log(err));
         },
         deleteTodo(id) {
