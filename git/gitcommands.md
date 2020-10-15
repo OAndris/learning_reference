@@ -1,16 +1,20 @@
 # git
 
 ## Some important concepts of Git
-- **Distributed Version Control** (Local Repository and Remote Repository)
-- **Three Tree Acrhitecture** (Working Directory, Staging Area, Repository)
+
+-   **Distributed Version Control** (Local Repository and Remote Repository)
+-   **Three Tree Acrhitecture** (Working Directory, Staging Area, Repository)
 
 ## Initialize a repository
+
 Clone an existing repository:
+
 ```
 git clone https://github.com/OAndris/react-packages-demo.git
 ```
 
 Create a new repository on the command line:
+
 ```
 echo "# my-new-repo" >> README.md
 git init
@@ -22,6 +26,7 @@ git push -u origin main
 ```
 
 Or push an existing repository from the command line:
+
 ```
 git remote add origin https://github.com/OAndris/my-new-repo.git
 git branch -M main
@@ -52,13 +57,24 @@ git push -u origin main
 
 `git push origin --delete my_branch` (delete branch remotely)
 
----
+## Workflow: Push a new local branch to a new remote branch
+
+`git checkout -b my_branch` (create and checkout new local branch)
+
+`git add -A` (stage changes)
+
+`git commit -m "Commit message"` (commit changes)
+
+`git push -u origin my_branch` (create new remote branch, track it and push to it)
+
 ---
 
+---
 
 ## Git commands
 
 ### Setup
+
 `git init`
 
 `git clone`
@@ -72,6 +88,7 @@ git push -u origin main
 `git config user.email "my_email@domain.com"`
 
 ### Check basic info
+
 `ls -la` (check whether the project is tracked by Git - it contains a ".git" folder if so)
 
 `git config`
@@ -113,6 +130,7 @@ git push -u origin main
 `git diff <hash of a commit>..<hash of a newer commit, or HEAD>` (shows the changes between two commits)
 
 ### Working Directory
+
 `git add .`
 
 `git add file.txt`
@@ -142,6 +160,7 @@ Remove every untracked changes (everything that is not in the repository or in t
 `git clean -i` (interactive)
 
 ### Staging Area
+
 `git reset HEAD file.txt` (unstage changes)
 
 `git revert <hash of the commit>` (revert the changes of a specific commit)
@@ -160,11 +179,16 @@ Remove every untracked changes (everything that is not in the repository or in t
 
 ### Other:
 
- `git fetch -p` (after fetching this "prune" flag, branches which no longer exist on the remote will also be deleted locally)
+`git fetch -p` (after fetching this "prune" flag, branches which no longer exist on the remote will also be deleted locally)
+
+`git branch -m oldbranch newbranch` (rename branch)
+
+`git branch -d mybranch` (delete branch)
 
 ## Sources:
 
-- [Git Tutorial for Beginners: Command-Line Fundamentals](https://www.youtube.com/watch?v=HVsySz-h9r4) by Corey Schafer (Youtube)
-- [Git Essential Training: The Basics](https://www.linkedin.com/learning/git-essential-training-the-basics/use-git-version-control-software-to-manage-project-code) by Kevin Skoglund (LinkedIn Learning)
-- [Learn Git in 20 minutes](https://www.youtube.com/watch?v=Y9XZQO1n_7c) by Code Insights (Youtube)
-- [How to Delete a Git Branch Both Locally and Remotely](https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/) by freeCodeCamp (article)
+-   [Git Tutorial for Beginners: Command-Line Fundamentals](https://www.youtube.com/watch?v=HVsySz-h9r4) by Corey Schafer (Youtube)
+-   [Git Essential Training: The Basics](https://www.linkedin.com/learning/git-essential-training-the-basics/use-git-version-control-software-to-manage-project-code) by Kevin Skoglund (LinkedIn Learning)
+-   [Learn Git in 20 minutes](https://www.youtube.com/watch?v=Y9XZQO1n_7c) by Code Insights (Youtube)
+-   [How to Delete a Git Branch Both Locally and Remotely](https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/) by freeCodeCamp (article)
+-   [Push a new local branch to a remote Git repository and track it too](https://forum.freecodecamp.org/t/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too/13222) by freeCodeCamp (article)
