@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Based on "Getting Started With Chart.js" by Traversy Media (https://www.youtube.com/watch?v=sE08f4iuOhA) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo of Chart.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #e0b907;
+            margin-bottom: 1em;
+            padding: 1em;
+            box-shadow: 0px 2px 20px gray;
+            text-transform: uppercase;
+        }
+        a {
+            color: #e0b907;
+        }
+        section {
+            display: flex;
+            flex-flow: row wrap;
+        }
+        canvas {
+            margin: 4em auto;
+            max-width: 750px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Demo of the <a href="https://www.chartjs.org/" target='_blank'>Chart.js</a> library</h1>
+    <section>
+        <canvas id="bar"></canvas>
+        <canvas id="horizontalBar"></canvas>
+        <canvas id="pie"></canvas>
+        <canvas id="line"></canvas>
+        <canvas id="doughnut"></canvas>
+        <canvas id="radar"></canvas>
+        <canvas id="polarArea"></canvas>
+    </section>
+    </body>
+
+<script>
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+    
+    const data = {
+        labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+        datasets: [{
+            label: 'Population',
+            data: [
+                617594,
+                181045,
+                153060,
+                106519,
+                105162,
+                95072
+            ],
+            // backgroundColor: 'green',
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(255, 99, 132, 0.6)',
+            ],
+            borderWidth: 1,
+            borderColor: '#777',
+            hoverBorderWidth: 2,
+            hoverBorderColor: '#000'
+        }]
+    };
+
+    const options = {
+        title: {
+            display: true,
+            text: 'Largest Cities in Massachusetts',
+            fontSize: 25
+        },
+        legend: {
+            // display: false,
+            position: 'right',
+            labels: {
+                fontColor: '#000'
+            }
+        },
+        layout: {
+            padding: {
+                left: 50,
+            }
+        },
+        tooltips: {
+            // enabled: false
+        }
+    };
+
+    new Chart(document.getElementById('bar').getContext('2d'), {type: 'bar', data, options});
+    new Chart(document.getElementById('horizontalBar').getContext('2d'), {type: 'horizontalBar', data, options});
+    new Chart(document.getElementById('pie').getContext('2d'), {type: 'pie', data, options});
+    new Chart(document.getElementById('line').getContext('2d'), {type: 'line', data, options});
+    new Chart(document.getElementById('doughnut').getContext('2d'), {type: 'doughnut', data, options});
+    new Chart(document.getElementById('radar').getContext('2d'), {type: 'radar', data, options});
+    new Chart(document.getElementById('polarArea').getContext('2d'), {type: 'polarArea', data, options});
+</script>
+</html>
