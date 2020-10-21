@@ -5,7 +5,13 @@
 -   **Distributed Version Control** (Local Repository and Remote Repository)
 -   **Three Tree Acrhitecture** (Working Directory, Staging Area, Repository)
 
-## Initialize a repository
+---
+
+---
+
+## Workflows
+
+### Workflow: Initialize a repository
 
 Clone an existing repository:
 
@@ -33,7 +39,7 @@ git branch -M main
 git push -u origin main
 ```
 
-## A basic Git workflow
+### Workflow: Full example
 
 `git checkout -B my_branch` (create a new branch and switch to it. Alternatively, `git branch my_branch` creates and `git checkout my_branch` switches to it)
 
@@ -57,7 +63,7 @@ git push -u origin main
 
 `git push origin --delete my_branch` (delete branch remotely)
 
-## Workflow: Push a new local branch to a new remote branch
+### Workflow: Push a new local branch to a new remote branch
 
 `git checkout -b my_branch` (create and checkout new local branch)
 
