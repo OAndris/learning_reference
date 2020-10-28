@@ -9,23 +9,26 @@
     will remain accessible for the inner function, even though they are not accessible for the outer world.
 */
 
-// function doSomeMath() {
-//   let a = 5;
-//   let b = 4;
-//   let sum = a + b;
-//   return sum;
-// } // variables a, b and sum are only accessible inside the function
-
+// Standard version:
 function doSomeMath() {
+    // Variables a, b and result are only accessible inside the function.
+    let a = 5;
+    let b = 4;
+    let result = a * b;
+    return result;
+}
+
+// Closure:
+function doSomeMathWithClosure() {
     let a = 5;
     let b = 4;
     function multiply() {
-        // This function is a closure.
+        // This function is a closure since it uses variables that are defined in an enclosing scope (not directly in this function's scope).
         let result = a * b;
         return result;
     }
     return multiply;
 }
 
-let theResult = doSomeMath()();
+let theResult = doSomeMathWithClosure()();
 console.log('The result: ', theResult);
