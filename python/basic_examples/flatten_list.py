@@ -21,7 +21,7 @@ print(list(chain.from_iterable(numbers)))
 print('\nUsing recursion and generators, it is easy to flatten all nested layers:')
 def flatten(numbers):
     for num in numbers:
-        if type(num) == int:
+        if isinstance(num, int):
             yield num
         else:
             yield from flatten(num)
