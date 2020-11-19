@@ -1,0 +1,1 @@
+exports.myVar = 5;
