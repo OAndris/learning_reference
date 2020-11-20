@@ -14,7 +14,9 @@
         <div class="jumbotron">
             <h1 class="display-4">Send Message</h1>
             <br>
-            <input type="text" class="form-control" placeholder="Name">
+            <input id="name" type="text" class="form-control" placeholder="Name">
+            <br>
+            <textarea id="message" type="text" class="form-control" placeholder="Message"></textarea>
             <br>
             <button id="send" class="btn btn-success">Send</button>
         </div>
@@ -23,13 +25,16 @@
 
     <script>
         $(() => {
-            $("#send").click(() => {
-                addMessages({name: 'Tim', message: 'Hello'})
-            })  // "$(selector).click(callback)" allows binding a callback to the click event of an element
             getMessages();
+            $("#send").click(() => {
+                postMessage({
+                    name: $("#name").val(),
+                    message: $("#message").val(),
+                });
+            })  // "$(selector).click(callback)" allows binding a callback to the click event of an element
         })  // "$(callback)" is the shorthand version of the "$( document ).ready()" function. It's called when the document finishes loading and all elements are rendered.
 
-        function addMessages(message) {
+        function addMessage(message) {
             $("#messages").append(`
                 <div>
                     <h4>${message.name}</h4>
@@ -40,8 +45,12 @@
 
         function getMessages() {
             $.get('http://localhost:3000/messages', data => {
-                data.forEach(addMessages)
+                data.forEach(addMessage)
             }) // make a GET request using jQuery
+        }
+
+        function postMessage(message) {
+            $.post('http://localhost:3000/messages', message)
         }
     </script>
 </body>
