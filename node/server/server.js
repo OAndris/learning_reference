@@ -26,15 +26,24 @@ app.get('/messages', (req, res) => {
     });
 }); // handle GET requests sent to the specified route (with a callback that gives us access to both the request and the response)
 
-app.post('/messages', (req, res) => {
-    const message = new Message(req.body);
-    message.save((err) => {
-        if (err) {
-            sendStatus(500);
+app.post('/messages', async (req, res) => {
+    try {
+        const message = new Message(req.body);
+        const savedMessage = await message.save();
+        const censored = await Message.findOne({ message: 'badword' });
+        if (censored) {
+            console.log('Censored words found: ', censored);
+            await Message.deleteOne({ _id: censored.id });
+        } else {
+            io.emit('message', req.body); // emit an event from the server to all clients, notifying them of a new message (sending the corresponding data)
         }
-        io.emit('message', req.body); // emit an event from the server to all clients, notifying them of a new message (sending the corresponding data)
         res.sendStatus(200);
-    });
+    } catch (error) {
+        res.sendStatus(500);
+        console.error(error);
+    } finally {
+        // The 'finally' block could be used e.g. for logging and/or closing a resource (it's executed regardless of the success or failure of the 'try' block)
+    }
 });
 
 io.on('connection', (socket) => {
