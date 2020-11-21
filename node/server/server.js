@@ -26,6 +26,13 @@ app.get('/messages', (req, res) => {
     });
 }); // handle GET requests sent to the specified route (with a callback that gives us access to both the request and the response)
 
+app.get('/messages/:user', (req, res) => {
+    const { user } = req.params;
+    Message.find({ name: user }, (err, messages) => {
+        res.send(messages);
+    });
+});
+
 app.post('/messages', async (req, res) => {
     try {
         const message = new Message(req.body);
