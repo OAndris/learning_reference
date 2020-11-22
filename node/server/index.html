@@ -30,10 +30,18 @@
         $(() => {
             getMessages();
             $("#send").click(() => {
-                postMessage({
-                    name: getValueFromInputAndClearIt("#name"),
-                    message: getValueFromInputAndClearIt("#message"),
-                });
+                const name = getValueFromInput("#name");
+                const message = getValueFromInput("#message");
+                if (name && message) {
+                    postMessage({
+                        name,
+                        message,
+                    });
+                    cleanValueFromInput("#name");
+                    cleanValueFromInput("#message");
+                } else {
+                    alert('Please fill out the form!')
+                }
             })  // "$(selector).click(callback)" allows binding a callback to the click event of an element
         })  // "$(callback)" is the shorthand version of the "$( document ).ready()" function. It's called when the document finishes loading and all elements are rendered.
 
@@ -48,10 +56,12 @@
             `)
         }
 
-        function getValueFromInputAndClearIt(selector) {
-            const value = $(selector).val();
+        function getValueFromInput(selector) {
+            return $(selector).val();
+        }
+
+        function cleanValueFromInput(selector) {
             $(selector).val('');
-            return value;
         }
 
         function getMessages() {
