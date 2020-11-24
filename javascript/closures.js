@@ -32,3 +32,25 @@ function doSomeMathWithClosure() {
 
 let theResult = doSomeMathWithClosure()();
 console.log('The result: ', theResult);
+
+// ==============================================================================
+
+// Example:
+const multiplyBy = (num1) => (num2) => num1 * num2;
+const multiplyByTwo = multiplyBy(2);
+const multiplyByThree = multiplyBy(3);
+
+// Example:
+const fun = (a, b) => {
+    return b !== undefined ? a * b : (b) => a * b;
+};
+fun(3, 5);
+fun(3)(10);
+
+// Memory efficiency:
+function createBigArray() {
+    const bigArray = new Array(7000).fill(0);
+    return (index) => bigArray[index];
+}
+const getElementFromBigArray = createBigArray();
+console.log('Element from big array: ', getElementFromBigArray(10));
