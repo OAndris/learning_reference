@@ -54,3 +54,23 @@ function createBigArray() {
 }
 const getElementFromBigArray = createBigArray();
 console.log('Element from big array: ', getElementFromBigArray(10));
+
+// Safety:
+const initialize = () => {
+    let view;
+    let isInitialized = false;
+    return () => {
+        if (isInitialized) {
+            console.log('Skipping initialization, view is already set!');
+            return;
+        } else {
+            isInitialized = true;
+            view = 'myView';
+            console.log(`View has been set: ${view}`);
+        }
+    };
+};
+const initOnce = initialize();
+initOnce();
+initOnce();
+initOnce();
