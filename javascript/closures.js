@@ -74,3 +74,21 @@ const initOnce = initialize();
 initOnce();
 initOnce();
 initOnce();
+
+// Encapsulation:
+const makeNuclearButton = () => {
+    let timeWithoutDestruction = 0;
+    const incrementPassedTime = () => timeWithoutDestruction++;
+    const getTotalPeaceTime = () => timeWithoutDestruction;
+    const launch = () => {
+        timeWithoutDestruction = -1;
+        return 'boom';
+    };
+    setInterval(incrementPassedTime, 1000);
+    return {
+        launch: launch,
+        totalPeaceTime: getTotalPeaceTime,
+    };
+};
+// const ohno = makeNuclearButton();
+// console.log(ohno.totalPeaceTime());
