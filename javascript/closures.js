@@ -35,19 +35,19 @@ console.log('The result: ', theResult);
 
 // ==============================================================================
 
-// Example:
+// Creating utility functions:
 const multiplyBy = (num1) => (num2) => num1 * num2;
 const multiplyByTwo = multiplyBy(2);
 const multiplyByThree = multiplyBy(3);
 
-// Example:
+// One function with multiple inputs or multiple functions with single input ("curried" version):
 const fun = (a, b) => {
     return b !== undefined ? a * b : (b) => a * b;
 };
 fun(3, 5);
 fun(3)(10);
 
-// Memory efficiency:
+// Memory efficiency (a large object is created and stored just once; but can be accessed any time):
 function createBigArray() {
     const bigArray = new Array(7000).fill(0);
     return (index) => bigArray[index];
@@ -55,7 +55,7 @@ function createBigArray() {
 const getElementFromBigArray = createBigArray();
 console.log('Element from big array: ', getElementFromBigArray(10));
 
-// Safety:
+// Safety (not allowing to initialize something more than once):
 const initialize = () => {
     let view;
     let isInitialized = false;
@@ -75,7 +75,7 @@ initOnce();
 initOnce();
 initOnce();
 
-// Encapsulation:
+// Encapsulation (allow only a portion of the functionality and data to be accessed from outside the function):
 const makeNuclearButton = () => {
     let timeWithoutDestruction = 0;
     const incrementPassedTime = () => timeWithoutDestruction++;
