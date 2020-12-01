@@ -8,11 +8,11 @@ const fetchUsersChainedThen = (url) => {
 };
 
 // Asynchronous function using Async/Await (ES8):
-async function fetchUsersAsyncAwait(url) {
+const fetchUsersAsyncAwait = async (url) => {
     const resp = await fetch(url);
     const data = await resp.json();
     console.log(data);
-}
+};
 
 const url = 'https://jsonplaceholder.typicode.com/posts';
 fetchUsersChainedThen(url);
