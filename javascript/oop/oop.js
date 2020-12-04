@@ -11,6 +11,8 @@ The Four Pillars of OOP:
 - "Abstraction": hiding the complexity from users by creating simpler interfaces (i.e. with private properties and methods, which JS doesn't have yet)
 - "Inheritance": by inheriting from other classes, we avoid duplications, keep the code DRY and also save memory space
 - "Polymorphism": the same method can be called on different objects and act differently (shared methods can be reused and customized)
+
+Source of example: https://www.udemy.com/course/advanced-javascript-concepts/
 */
 
 // ==============================================================================
