@@ -5,6 +5,7 @@ These examples demonstrate the evolution of OOP in JavaScript:
 1) "Factory functions" with "Stores"
 2) "Constructor functions" with "Prototype" and the "new" keyword
 3) "class" keyword (together with "new" keyword) to simulate classical OOP, but using prototypal inheritance
+3+1) Using Functional Programming instead of OOP
 
 The Four Pillars of OOP:
 - "Encapsulation": properties and methods are organized in objects. Objects can interact with each other, and together they model the whole "system"
@@ -64,3 +65,24 @@ class Elf2 {
 const peter3 = new Elf2('Peter 3', 'stones');
 peter3.attack();
 console.log(peter3.name, peter3.weapon);
+
+// ==============================================================================
+// 3+1) Using Functional Programming instead of OOP:
+// ==============================================================================
+function getAttack(character) {
+    const attack = () => {
+        console.log(`${character.name} attacks with ${character.weapon}`);
+    };
+    return Object.assign({}, character, { attack: attack });
+}
+function Elf(name, weapon, type) {
+    let elf = {
+        name,
+        weapon,
+        type,
+    };
+    return getAttack(elf);
+}
+const legolas = Elf('Legolas', 'bow', 'wooden');
+legolas.attack();
+console.log(legolas.name, legolas.weapon);
