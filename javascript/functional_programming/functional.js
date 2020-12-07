@@ -35,7 +35,7 @@ const item = {
     price: 200,
 };
 
-const log = [];
+let log = [];
 
 //=====================================================
 // Individual functions
@@ -76,8 +76,49 @@ function emptyCart(user) {
 //=====================================================
 // Combined functions
 //=====================================================
-function combineFunctions(...fns) {
-    const pipe = (f, g) => (...args) => g(f(...args));
-    // const compose = (f, g) => (...args) => f(g(...args));
-    return fns.reduce(pipe);
+
+// The traditional way:
+function purchaseItemTraditional(user, item) {
+    log.push('Purchase item initiated.');
+    let newUser;
+    newUser = addItemToCart(user, item);
+    newUser = applyTaxToItems(newUser);
+    newUser = buyItem(newUser);
+    newUser = emptyCart(newUser);
+    log.push(newUser);
+    log.push('Purchase item completed.');
+    return newUser;
 }
+
+// With "compose" or "pipe":
+function compose(...fns) {
+    return fns.reduce((f, g) => (...args) => f(g(...args)));
+}
+
+function pipe(...fns) {
+    return fns.reduce((f, g) => (...args) => g(f(...args)));
+}
+
+function purchaseItemWithPipe(user, item) {
+    // Same as "purchaseItemTraditional" but using "pipe" to chain the functions
+    log.push('Purchase item initiated.');
+    const newUser = pipe(addItemToCart, applyTaxToItems, buyItem, emptyCart)(user, item);
+    log.push(newUser);
+    log.push('Purchase item completed.');
+    return newUser;
+}
+
+//=====================================================
+console.log('Initial log:');
+console.log(log);
+console.log('Purchase in traditional way:');
+purchaseItemTraditional(user, item);
+console.log(log);
+console.log('');
+
+log = [];
+console.log('Reseted log:');
+console.log(log);
+console.log('Purchase with pipe:');
+purchaseItemWithPipe(user, item);
+console.log(log);
