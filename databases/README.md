@@ -5,10 +5,27 @@
 2. Normalize it
 3. Create it (either with SQL commands, the GUI of a RDBMS, or an ORM)
 
-## ???
-- DDL
-- DML
-- DCL
+## Types (categories) of SQL commands:
+- DDL: Data Definition Language
+    - CREATE
+    - ALTER
+    - DROP
+    - RENAME
+    - TRUNCATE
+    - COMMENT
+- DQL: Data Query Language
+    - SELECT
+- DML: Data Manipulation Language
+    - INSERT
+    - UPDATE
+    - DELETE
+    - MERGE
+    - CALL
+    - EXPLAIN PLAN
+    - LOCK TABLE
+- DCL: Data Control Language
+    - GRANT
+    - REVOKE
 
 ## Modeling and planning a database (using an Entity-Relationship Diagram):
 1. **Tables:** What tables are needed?
@@ -116,3 +133,4 @@
 
 ## Sources:
 - [Programming Foundations: Databases](https://www.linkedin.com/learning/programming-foundations-databases-2) by Scott Simpson (LinkedIn Learning)
+- [SQL | DDL, DQL, DML, DCL and TCL Commands](https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/)
