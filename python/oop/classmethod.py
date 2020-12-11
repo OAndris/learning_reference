@@ -1,6 +1,10 @@
 """
 In Python, a classmethod can be used for creating alternative constructors for a class.
 
+It is defined by using the "@classmethod" decorator.
+The first, implicit parameter taken by the method will be the class itself (instead of the object).
+This reference to the class itself can be used as the constructor.
+
 Source of example: PyBites
 """
 
