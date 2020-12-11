@@ -1,21 +1,54 @@
 # Databases
 
+## Basics:
+- Databases let us work with large amounts of data efficiently
+- They make storing, organizing, updating and searching data easy and reliable
+- They help to ensure accuracy and help to avoid redundancy
+- They offer security features to control access
+
+---
+
+## NoSQL (Not Only SQL):
+This document is about relational databases. However, not every information can be stored in a relational database.
+
+Some other types of databases:
+- Document (e.g. CouchDB, MongoDB)
+- Graphs (e.g. Neo4j)
+- Objects (e.g. Realm, ObjectivityDB)
+- Geographic data points
+- Stream of information (e.g. posts and comments on social media websites)
+
+The rest of the document is about relational databases.
+
+---
+
+## Concepts:
+- A relational database is made up of tables (relations)
+- Tables represent entities
+- Columns (fields) represent the attributes of an entity
+- Rows (records) represent instances of an entity
+- Primary key: a unique value that can be used to refer to a specific record
+    - Natural key: a key that represents some kind of useful data on its own
+    - Surrogate key: a key that was created specifically and solely to serve as a key (e.g. an incremented ID)
+- Foreign key: a key that references the primary key of an other, related table
+- Composite key: a key composed of multiple fields
+
 ## Steps:
 1. Plan and design the database
 2. Normalize it
 3. Create it (either with SQL commands, the GUI of a RDBMS, or an ORM)
 
-## Types (categories) of SQL commands:
-- DDL: Data Definition Language
+## Types (categories) of SQL commands (with the related SQL keywords):
+- DDL: Data Definition Language (organizing data)
     - CREATE
     - ALTER
     - DROP
     - RENAME
     - TRUNCATE
     - COMMENT
-- DQL: Data Query Language
+- DQL: Data Query Language (searching data)
     - SELECT
-- DML: Data Manipulation Language
+- DML: Data Manipulation Language (interacting with data)
     - INSERT
     - UPDATE
     - DELETE
@@ -23,7 +56,7 @@
     - CALL
     - EXPLAIN PLAN
     - LOCK TABLE
-- DCL: Data Control Language
+- DCL: Data Control Language (controlling access)
     - GRANT
     - REVOKE
 
@@ -36,11 +69,14 @@
 
 ## Relationships:
 - **One-to-Many (1 : N) relationship**
-    - E.g. 
+    - The most common relationship
+    - It associates a single record from a table with multiple records of another table
+    - E.g. one dish can be associated to multiple customers (the primary key of the Dishes table can be referenced by multiple records of the Customers table with its foreign key)
 - **Many-to-Many (N : M) relationship**
-    - E.g. 
+    - Multiple records from a table can be associated with multiple records of another table
+    - Requires a linking table with two foreign keys for referencing the primary keys of the two connected tables
 - **One-to-One (1 : 1) relationship**
-    - E.g. 
+    - Associates a single record from a table with a single record from another table (exclusively)
 - **Denormalization**
     - E.g. 
 
@@ -52,6 +88,10 @@
 ## Querying a database:
 - Index
 - Transaction
+    - A set of operations that must all be completed
+    - If any of the operations is not completed, no changes will be made to the database
+    - Transactions follow the "ACID" principle, thus transactions are atomic, consistent, isolated, and durable
+    - ACID requirements are handled by DBMS when transactions are used
 - Stored Procedure
 - Access Control
 - Compliance
@@ -84,16 +124,6 @@
 - Solutions for different database sizes:
     - SQLite is great for smaller databases (e.g. storing user preferences on a mobile device)
     - "Big Data" may require processing frameworks like Hadoop or Spark
-
-## NoSQL (Not Only SQL):
-- Not every information can be stored in a relational database
-- Types:
-    - Unstructured data
-    - Key-value pairs
-    - Graphs
-    - Objects
-    - Geographic data points
-    - Stream of information (e.g. posts and comments on social media websites)
 
 ## Examples:
     CREATE DATABASE`
