@@ -24,14 +24,16 @@ The rest of the document is about relational databases.
 
 ## Concepts:
 - A relational database is made up of tables (relations)
-- Tables represent entities
-- Columns (fields) represent the attributes of an entity
-- Rows (records) represent instances of an entity
-- Primary key: a unique value that can be used to refer to a specific record
-    - Natural key: a key that represents some kind of useful data on its own
-    - Surrogate key: a key that was created specifically and solely to serve as a key (e.g. an incremented ID)
-- Foreign key: a key that references the primary key of an other, related table
-- Composite key: a key composed of multiple fields
+- **Tables** represent entities
+- **Columns** (fields) represent the attributes of an entity
+- **Rows** (records) represent instances of an entity
+- **Primary key** - a unique value that can be used to refer to a specific record
+    - **Natural key** - a key that represents some kind of useful data on its own
+    - **Surrogate key** - a key that was created specifically and solely to serve as a key (e.g. an incremented ID)
+- **Foreign key** - a key that references the primary key of an other, related table
+- **Composite key** - a key composed of multiple fields (to uniquely identify a record)
+
+A **UUID (Universally-Unique Identifier)** is a longer ID (as opposed to e.g. an auto-incremented integer ID), which is harder for an attacker to guess.
 
 ## Steps:
 1. Plan and design the database
@@ -60,12 +62,31 @@ The rest of the document is about relational databases.
     - GRANT
     - REVOKE
 
-## Modeling and planning a database (using an Entity-Relationship Diagram):
-1. **Tables:** What tables are needed?
-2. **Fields:** What are the required fields for each table?
-3. **Data types:** Determine the data types for each field
-4. **Primary key:** Determine the primary key for each table
-5. **Relationships:** Determine the foreign keys and relationships (including any referential constraints) between tables (to organize tables, reduce redundancy and improve the integrity of our data)
+## Modeling and planning a database:
+
+Create an **Entity Relationship (ER) Diagram**, it is extremely useful in planning.
+
+Steps to perform:
+1. **Tables** - What tables are needed? How to name them (use plurals)?
+2. **Fields** - What are the required fields for each table?
+3. **Data types** - Determine the data types for each field
+4. **Primary key** - Determine the primary key for each table
+5. **Relationships** - Determine the foreign keys and relationships (including any referential constraints) between tables (to organize tables, reduce redundancy and improve the integrity of our data)
+
+## Data types:
+- Strings - alphanumeric characters and text:
+    - **CHAR** - fixed number of characters
+    - **VARCHAR** - variable number of characters up to a maximum length
+    - other types for longer text
+- Dates:
+    - **DATE**
+    - **DATETIME**
+    - **TIMESTAMP**
+- Numbers:
+    - **DECIMAL**
+    - **INT**
+    - Double precision
+    - Floating point
 
 ## Relationships:
 - **One-to-Many (1 : N) relationship**
