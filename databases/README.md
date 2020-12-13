@@ -98,8 +98,27 @@ Steps to perform:
     - Requires a linking table with two foreign keys for referencing the primary keys of the two connected tables
 - **One-to-One (1 : 1) relationship**
     - Associates a single record from a table with a single record from another table (exclusively)
+- **Referential Integrity**
+    - Databases can be made aware of relationships between tables and prevent users from modifying data in a way that violates those relationships
+    - It helps us to maintain the integrity, consistency of the data
+    - Examples:
+        - a foreign key cannot reference to a non-existing record
+        - a child cannot be deleted for as long as it is being referenced by any parent
+        - deleting a parent might automatically delete all of its referenced children
+        - etc.
 - **Denormalization**
     - E.g. 
+
+## Normalization:
+- "Normal Forms" are normalization rules for organizing data in a database, for optimizing its structure
+- They help us to reduce redundancy and improve the ingreity of our data
+- Among the many normal forms, there are 3 that are critically important and most often talked about
+- Applying these rules is an important step in designing any database
+- These normal forms / normalization rules build on top of each other (step by step), each further optimizing the database
+- Normalization rules:
+    - First normal form (1NF)
+    - Second normal form (2NF)
+    - Third normal form (3NF)
 
 ## Notes:
 - For security reasons, consider using a UUID (Universally-Unique Identifier) instead of an integer key. It is much longer and thus more difficult for an attacker to guess
