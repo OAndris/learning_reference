@@ -106,19 +106,26 @@ Steps to perform:
         - a child cannot be deleted for as long as it is being referenced by any parent
         - deleting a parent might automatically delete all of its referenced children
         - etc.
-- **Denormalization**
-    - E.g. 
 
 ## Normalization:
 - "Normal Forms" are normalization rules for organizing data in a database, for optimizing its structure
-- They help us to reduce redundancy and improve the ingreity of our data
-- Among the many normal forms, there are 3 that are critically important and most often talked about
-- Applying these rules is an important step in designing any database
-- These normal forms / normalization rules build on top of each other (step by step), each further optimizing the database
-- Normalization rules:
-    - First normal form (1NF)
-    - Second normal form (2NF)
-    - Third normal form (3NF)
+- They help us to reduce redundancy and improve the integrity of our data
+- Among the many normal forms, there are 3 that are critically important. Normalizing database to third normal form is a best practice
+- Applying the normalization rules is an important step in designing any database
+- The normal forms / normalization rules build on top of each other (step by step), each further optimizing the database
+- On very rare occasion (e.g. due to business needs or performance issues), violating the normal forms might be necessary. **Denormalization** is the process of intentionally duplicating information in a table (in violation of normalization rules). It doesn't mean skipping normalization, as it is done to a previously normalized database. It is a trade-off: increasing speed, but potentially reducing consistency.
+
+Normalization rules:
+- **First normal form (1NF)**
+    - Values in each cell should be atomic and tables should have no repeating groups (each field in each table has only one value in it - there are no columns representing repeated kinds of data for each row)
+    - The order of fields and the order of rows shouldn't matter (if the sequence is important, use an auto-incremented unique value, or a timestamp)
+    - E.g. the favourite foods of a person should neither be stored in N separate fields, nor in a single field with comma separated values (instead, a linking table should be used)
+- **Second normal form (2NF)**
+    - No value in a table should depend on only part of a key that can be used to uniquely identify a row (for every non-key column in the table, each value must rely on only the whole key)
+    - E.g. if a composite key composed of 2 fields is used for uniquely identifying rows, but 1 of 2 keys is enough for uniquely identifying it, then only it should be used (and the second field's values, as well as their mapping to the first field's values can be outsourced to a new table)
+- **Third normal form (3NF)**
+    - Values should not be stored if they can be calculated from another non-key field
+    - E.g. when prices are stored in a field, discount prices that could be calculated by a formula shouldn't be stored in a second field (it is a meaningless waste of resources, and might as well cause inconsistency in our data)
 
 ## Notes:
 - For security reasons, consider using a UUID (Universally-Unique Identifier) instead of an integer key. It is much longer and thus more difficult for an attacker to guess
