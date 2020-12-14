@@ -18,11 +18,12 @@ Some other types of databases:
 - Geographic data points
 - Stream of information (e.g. posts and comments on social media websites)
 
-The rest of the document is about relational databases.
+The rest of this document is about relational databases.
 
 ---
 
 ## Concepts:
+- SQL commands can be written in a DBMS, an application's source code, or in the command line
 - A relational database is made up of tables (relations)
 - **Tables** represent entities
 - **Columns** (fields) represent the attributes of an entity
@@ -40,7 +41,7 @@ A **UUID (Universally-Unique Identifier)** is a longer ID (as opposed to e.g. an
 2. Normalize it
 3. Create it (either with SQL commands, the GUI of a RDBMS, or an ORM)
 
-## Types (categories) of SQL commands (with the related SQL keywords):
+## Types of SQL commands (with the related SQL keywords):
 - DDL: Data Definition Language (organizing data)
     - CREATE
     - ALTER
@@ -98,6 +99,7 @@ Steps to perform:
     - Requires a linking table with two foreign keys for referencing the primary keys of the two connected tables
 - **One-to-One (1 : 1) relationship**
     - Associates a single record from a table with a single record from another table (exclusively)
+    - It is rarely used. A use case might be to outsource related, but sensitive data to another table (which can have different access rights than the original table)
 - **Referential Integrity**
     - Databases can be made aware of relationships between tables and prevent users from modifying data in a way that violates those relationships
     - It helps us to maintain the integrity, consistency of the data
@@ -127,32 +129,40 @@ Normalization rules:
     - Values should not be stored if they can be calculated from another non-key field
     - E.g. when prices are stored in a field, discount prices that could be calculated by a formula shouldn't be stored in a second field (it is a meaningless waste of resources, and might as well cause inconsistency in our data)
 
-## Notes:
-- For security reasons, consider using a UUID (Universally-Unique Identifier) instead of an integer key. It is much longer and thus more difficult for an attacker to guess
-- SQL commands can be written in a DBMS, an application's source code, or in the command line
-- 
-
-## Querying a database:
-- Index
-- Transaction
-    - A set of operations that must all be completed
-    - If any of the operations is not completed, no changes will be made to the database
+## Increasing the speed, integrity and consistency of the database:
+- Indexes:
+    - Tables can have indexes, which allows looking up information quickly
+    - A primary key also serves as an index, but in larger tables, additional indexes might help to look up relevant information faster
+    - Using indexes is a trade-off: they make the lookup of data faster, but the update of data slower
+    - E.g. if customers are often searched up directly by their names, then, in a large table, it can become slow. By creating an index for the firstname + lastname fields, the database stores a reference to what each value is in those fields and where it is located, making it faster for the database to return the information
+- Transaction:
+    - A set of operations that must all be completed together
+    - If any of the operations fails, none of the operations is executed (there is no "partially done", if anything fails, the database is rolled back to the previous, valid, unchanged state)
     - Transactions follow the "ACID" principle, thus transactions are atomic, consistent, isolated, and durable
     - ACID requirements are handled by DBMS when transactions are used
-- Stored Procedure
-- Access Control
-- Compliance
-- SQL Injection
-    - Type of attack that includes part of a SQL command entered as a value to hijack a query and change how it works
+- Stored procedure:
+    - A series of commands stored on the database server
+    - They allow reusing long or detailed queries (instead of writing them for each use)
+    - They also provide a safe way to deal with sensitive data. In many cases, access to certain sensitive data (or whole tables) is only allowed through stored procedures rather than directly
+
+## Security:
+- Access control:
+    - User accounts can be created, and different rights can be assigned to each
+    - Table and column permissions can granted and restricted
+- Compliance:
+    - Personally Identifiable Information (PII) is strictly regulated in some regions and industries
+    - HIPAA in the US and GDPR in the EU have strict rules about how PII is handled
+- SQL injection:
+    - A type of attack that includes part of a SQL command entered as a value to hijack a query and change how it works
     - The attacker could delete tables, modify values, delete the entire the database, or retrieve sensitive information, for example
-    - Example: user input on UI is "Tom" for first name and "''); DROP TABLE customers; --" for last name could end up executed as "INSERT INTO customers (first_name, last_name) VALUE('Tom', ''); DROP TABLE customers; --" (note: the "--" at the end of the statement prevents the database from using any potential remaining part of the original command)
+    - Example: user input on the UI is "Tom" for first name and "'); DROP TABLE customers; --" for last name. It could end up executed as "INSERT INTO customers (first_name, last_name) VALUES('Tom', ''); DROP TABLE customers; --', '');" (note: the "--" at the end of the statement prevents the database from using the remaining part of the original command)
     - How to avoid an injection attack:
         - Proper design of access control
         - Best practices for interacting with data
         - Safety features offered by programming languages
         - Proper processing of data that's entered
 
-## Common Relational Database Management Systems (RDBMSs):
+## Relational Database Management Systems (RDBMSs):
 - Softwares:
     - Microsoft SQL Server
     - Oracle
@@ -163,50 +173,55 @@ Normalization rules:
     - MariaDB
     - SAP HANA
     - SQLite
+    - etc.
 - Some offer a GUI, others just a console for writing SQL commands
 - Use case:
-    - Desktop database: used for smaller solutions, hosted on workstation (e.g. Access, Filemaker Pro)
-    - Enterprise database: used by large number of people, services millions of interactions (e.g. SQL Server, Oracle, SAP HANA)
-    - In-between: for many different applications, and for prototyping an idea or handling just several thousands of clients, there are completely free and great RDBMSs, like MariaDB and MySQL
+    - **Desktop database** - used for smaller solutions, hosted on a workstation (e.g. Access, Filemaker Pro)
+    - **Enterprise database** - used by large number of people, hosted on a dedicated server, serves millions of interactions (e.g. SQL Server, Oracle, SAP HANA)
+    - **In-between** - for many different applications, and for prototyping an idea or handling just several thousands of clients, there are completely free and great RDBMSs, like MariaDB and MySQL
 - Solutions for different database sizes:
-    - SQLite is great for smaller databases (e.g. storing user preferences on a mobile device)
+    - SQLite is great for very small databases (e.g. storing user preferences on a mobile device)
     - "Big Data" may require processing frameworks like Hadoop or Spark
 
 ## Examples:
-    CREATE DATABASE`
+    CREATE DATABASE restaurant;
+
     CREATE TABLE customers (
         customer_id INT(6) NOT NULL AUTO_INCREMENT,
-        first_name VARCHAR(200),
-        last_name
-        email
-        address
-        city
-        state
-        phone
-        birthday
+        first_name VARCHAR(200) NOT NULL,
+        last_name VARCHAR(200) NOT NULL,
+        email VARCHAR(200),
+        address VARCHAR(200),
+        city VARCHAR(200),
+        state CHAR(2),
+        phone VARCHAR(20) NOT NULL,
+        birthday DATE,
         favourite_dish INT(6) REFERENCES dishes(dish_id),
-    )
+        PRIMARY KEY(customer_id)
+    );
 
+    -- Querying and narrowing records:
     SELECT * FROM customers;
     SELECT first_name, last_name, email FROM customers;
     SELECT first_name, last_name, email FROM customers WHERE state="CA";
     SELECT first_name, last_name, email FROM customers WHERE state="CA" OR state="CO";
     SELECT first_name, last_name, email FROM customers WHERE state LIKE "%C";
-
     SELECT * FROM reservations WHERE `date` > "2019-02-06" AND `date` < "2019-02-07";
 
+    -- Sorting records:
     SELECT * FROM reservations ORDER BY `date`;
 
+    -- Aggregate functions:
     SELECT COUNT(first_name) FROM customers;
     SELECT SUM(price), AVG(price), MIN(price), MAX(price) FROM dishes;
 
+    -- Joining multiple tables:
     SELECT first_name, last_name, dishes.`name` FROM customers JOIN dishes ON customers.favourite_dish = dishes.dish_id;
 
+    -- Inserting, updating and deleting data:
     INSERT INTO customers(first_name, last_name, email) VALUE ("Jane", "Smith", "jsmith2019@landonhotel.com");
-
+    UPDATE customers SET email = "tjenkins@landonhotel.com" WHERE customer_id = 1;
     DELETE FROM customers WHERE customer_id=26;
-
-    
 
 ## Sources:
 - [Programming Foundations: Databases](https://www.linkedin.com/learning/programming-foundations-databases-2) by Scott Simpson (LinkedIn Learning)
