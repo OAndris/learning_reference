@@ -1,26 +1,56 @@
 # Databases
 
+This document is a summary about SQL relational databases.
+
+
 ## Basics:
 - Databases let us work with large amounts of data efficiently
 - They make storing, organizing, updating and searching data easy and reliable
 - They help to ensure accuracy and help to avoid redundancy
 - They offer security features to control access
+- SQL vs. NoSQL:
+    - **SQL (Structured Query Language)**
+        - relational database
+        - table-based database
+        - predefined schema (data is structured)
+        - data is partitioned across multiple tables
+    - **NoSQL (Not Only SQL)**
+        - non-relational database
+        - various types, e.g. document-, graph-, object-based
+        - non-fixed schema (potentially unstructured data)
+        - data for an entity is stored together
+        - some examples:
+            - Document (e.g. CouchDB, MongoDB)
+            - Graphs (e.g. Neo4j)
+            - Objects (e.g. Realm, ObjectivityDB)
+            - Geographic data points
+            - Stream of information (e.g. posts and comments on social media websites)
+    - Each has different use cases, pros and cons
+- **ORM (Object-Relational Mapping)**
+    - ORM tools allow converting data between the otherwise incompatible objects (in object-oriented programming) and database tables
+    - ORMs, therefore, enable us to create and use databases directly from the programming language (using the same language as the rest of the application, instead of SQL)
+    - ORMs are high-level tools for abstracting database interactions
+    - ORMs also have their pros and cons
+    - there are various ORM tools for different programming languages, such as:
+        - **Python** - SQLAlchemy, Django (backend framework that includes ORM)
+        - **Java** - Hibernate
+        - **Node.js** - Sequelize, TypeORM
+    - three different layers of abstracting database interactions:
+        - low-level database drivers
+        - query builders (e.g. "knex" for Node.js)
+        - high-level ORMs
+- **DBMS (Database Management System)**
+    - DBMS refers to the actual software that provides the necessary features for users to manage a database and its data, including the common CRUD (Create, Read, Update, Delete) operations, as well as administration and access control
+    - some DBMS softwares include MySQL, MariaDB, SQLite, PostgreSQL, MSSQL, Oracle Database, Microsoft Access. Various DBMSs might have slightly different syntax
+    - some offer a GUI, others just a console for writing SQL commands
+    - Use case:
+        - **Desktop database** - used for smaller solutions, hosted on a workstation (e.g. Access, Filemaker Pro)
+        - **Enterprise database** - used by large number of people, hosted on a dedicated server, serves millions of interactions (e.g. SQL Server, Oracle, SAP HANA)
+        - **In-between** - for many different applications, and for prototyping an idea or handling just several thousands of clients, there are completely free and great RDBMSs, like MariaDB and MySQL
+    - Solutions for different database sizes:
+        - SQLite is great for very small databases (e.g. storing user preferences on a mobile device)
+        - "Big Data" may require processing frameworks like Hadoop or Spark
 
----
-
-## NoSQL (Not Only SQL):
-This document is about relational databases. However, not every information can be stored in a relational database.
-
-Some other types of databases:
-- Document (e.g. CouchDB, MongoDB)
-- Graphs (e.g. Neo4j)
-- Objects (e.g. Realm, ObjectivityDB)
-- Geographic data points
-- Stream of information (e.g. posts and comments on social media websites)
-
-The rest of this document is about relational databases.
-
----
 
 ## Concepts:
 - SQL commands can be written in a DBMS, an application's source code, or in the command line
@@ -36,22 +66,18 @@ The rest of this document is about relational databases.
 
 A **UUID (Universally-Unique Identifier)** is a longer ID (as opposed to e.g. an auto-incremented integer ID), which is harder for an attacker to guess.
 
-## Steps:
-1. Plan and design the database
-2. Normalize it
-3. Create it (either with SQL commands, the GUI of a RDBMS, or an ORM)
 
-## Types of SQL commands (with the related SQL keywords):
-- DDL: Data Definition Language (organizing data)
+## Types of SQL commands, and some related SQL keywords:
+- **DDL: Data Definition Language** (organizing data)
     - CREATE
     - ALTER
     - DROP
     - RENAME
     - TRUNCATE
     - COMMENT
-- DQL: Data Query Language (searching data)
+- **DQL: Data Query Language** (searching data)
     - SELECT
-- DML: Data Manipulation Language (interacting with data)
+- **DML: Data Manipulation Language** (interacting with data)
     - INSERT
     - UPDATE
     - DELETE
@@ -59,37 +85,53 @@ A **UUID (Universally-Unique Identifier)** is a longer ID (as opposed to e.g. an
     - CALL
     - EXPLAIN PLAN
     - LOCK TABLE
-- DCL: Data Control Language (controlling access)
+- **DCL: Data Control Language** (controlling access)
     - GRANT
     - REVOKE
 
-## Modeling and planning a database:
+---
+
+## Steps of creating a database:
+1. Plan and design the database
+2. Normalize database
+3. Create database (either with SQL commands, the GUI of a RDBMS, or an ORM)
+
+
+## 1) Planning and modeling a database:
 
 Create an **Entity Relationship (ER) Diagram**, it is extremely useful in planning.
 
 Steps to perform:
-1. **Tables** - What tables are needed? How to name them (use plurals)?
+1. **Tables** - What tables are needed? How to name them? (use plurals)
 2. **Fields** - What are the required fields for each table?
 3. **Data types** - Determine the data types for each field
 4. **Primary key** - Determine the primary key for each table
 5. **Relationships** - Determine the foreign keys and relationships (including any referential constraints) between tables (to organize tables, reduce redundancy and improve the integrity of our data)
 
-## Data types:
+
+### Data types:
 - Strings - alphanumeric characters and text:
     - **CHAR** - fixed number of characters
     - **VARCHAR** - variable number of characters up to a maximum length
-    - other types for longer text
+    - **LONGTEXT**
+    - etc.
 - Dates:
-    - **DATE**
-    - **DATETIME**
-    - **TIMESTAMP**
+    - **DATE** - YYYY-MM-DD
+    - **DATETIME** - YYYY-MM-DD hh:mm:ss
+    - **TIMESTAMP** - stored as the number of seconds since the Unix epoch ('1970-01-01 00:00:00' UTC)
+    - **YEAR** - YYYY
+    - etc.
 - Numbers:
     - **DECIMAL**
     - **INT**
-    - Double precision
-    - Floating point
+    - **BIGINT**
+    - **BOOL**
+    - **FLOAT**
+    - **DOUBLE**
+    - etc.
 
-## Relationships:
+
+### Relationships:
 - **One-to-Many (1 : N) relationship**
     - The most common relationship
     - It associates a single record from a table with multiple records of another table
@@ -109,7 +151,8 @@ Steps to perform:
         - deleting a parent might automatically delete all of its referenced children
         - etc.
 
-## Normalization:
+
+## 2) Normalization:
 - "Normal Forms" are normalization rules for organizing data in a database, for optimizing its structure
 - They help us to reduce redundancy and improve the integrity of our data
 - Among the many normal forms, there are 3 that are critically important. Normalizing database to third normal form is a best practice
@@ -119,39 +162,42 @@ Steps to perform:
 
 Normalization rules:
 - **First normal form (1NF)**
-    - Values in each cell should be atomic and tables should have no repeating groups (each field in each table has only one value in it - there are no columns representing repeated kinds of data for each row)
+    - **Values in each cell should be atomic and tables should have no repeating groups** (each field in each table has only one value in it - there are no columns representing repeated kinds of data for each row)
     - The order of fields and the order of rows shouldn't matter (if the sequence is important, use an auto-incremented unique value, or a timestamp)
     - E.g. the favourite foods of a person should neither be stored in N separate fields, nor in a single field with comma separated values (instead, a linking table should be used)
 - **Second normal form (2NF)**
-    - No value in a table should depend on only part of a key that can be used to uniquely identify a row (for every non-key column in the table, each value must rely on only the whole key)
+    - **No value in a table should depend on only part of a key** that can be used to uniquely identify a row (for every non-key column in the table, each value must rely on only the whole key)
     - E.g. if a composite key composed of 2 fields is used for uniquely identifying rows, but 1 of 2 keys is enough for uniquely identifying it, then only it should be used (and the second field's values, as well as their mapping to the first field's values can be outsourced to a new table)
 - **Third normal form (3NF)**
-    - Values should not be stored if they can be calculated from another non-key field
+    - **Values should not be stored if they can be calculated from another non-key field**
     - E.g. when prices are stored in a field, discount prices that could be calculated by a formula shouldn't be stored in a second field (it is a meaningless waste of resources, and might as well cause inconsistency in our data)
 
-## Increasing the speed, integrity and consistency of the database:
-- Indexes:
+
+### Increasing the speed, integrity and consistency of the database:
+- **Indexes**
     - Tables can have indexes, which allows looking up information quickly
     - A primary key also serves as an index, but in larger tables, additional indexes might help to look up relevant information faster
     - Using indexes is a trade-off: they make the lookup of data faster, but the update of data slower
     - E.g. if customers are often searched up directly by their names, then, in a large table, it can become slow. By creating an index for the firstname + lastname fields, the database stores a reference to what each value is in those fields and where it is located, making it faster for the database to return the information
-- Transaction:
+- **Transaction**
     - A set of operations that must all be completed together
     - If any of the operations fails, none of the operations is executed (there is no "partially done", if anything fails, the database is rolled back to the previous, valid, unchanged state)
     - Transactions follow the "ACID" principle, thus transactions are atomic, consistent, isolated, and durable
     - ACID requirements are handled by DBMS when transactions are used
-- Stored procedure:
+- **Stored procedure**
     - A series of commands stored on the database server
     - They allow reusing long or detailed queries (instead of writing them for each use)
     - They also provide a safe way to deal with sensitive data. In many cases, access to certain sensitive data (or whole tables) is only allowed through stored procedures rather than directly
 
-## Security:
+
+### Security:
 - Access control:
     - User accounts can be created, and different rights can be assigned to each
     - Table and column permissions can granted and restricted
 - Compliance:
     - Personally Identifiable Information (PII) is strictly regulated in some regions and industries
     - HIPAA in the US and GDPR in the EU have strict rules about how PII is handled
+    - Skipping compliance requirements can become a costly mistake
 - SQL injection:
     - A type of attack that includes part of a SQL command entered as a value to hijack a query and change how it works
     - The attacker could delete tables, modify values, delete the entire the database, or retrieve sensitive information, for example
@@ -162,28 +208,8 @@ Normalization rules:
         - Safety features offered by programming languages
         - Proper processing of data that's entered
 
-## Relational Database Management Systems (RDBMSs):
-- Softwares:
-    - Microsoft SQL Server
-    - Oracle
-    - dBase
-    - FileMaker Pro
-    - Microsoft Access
-    - MySQL
-    - MariaDB
-    - SAP HANA
-    - SQLite
-    - etc.
-- Some offer a GUI, others just a console for writing SQL commands
-- Use case:
-    - **Desktop database** - used for smaller solutions, hosted on a workstation (e.g. Access, Filemaker Pro)
-    - **Enterprise database** - used by large number of people, hosted on a dedicated server, serves millions of interactions (e.g. SQL Server, Oracle, SAP HANA)
-    - **In-between** - for many different applications, and for prototyping an idea or handling just several thousands of clients, there are completely free and great RDBMSs, like MariaDB and MySQL
-- Solutions for different database sizes:
-    - SQLite is great for very small databases (e.g. storing user preferences on a mobile device)
-    - "Big Data" may require processing frameworks like Hadoop or Spark
 
-## Examples:
+## 3) Creating and using a database (examples):
     CREATE DATABASE restaurant;
 
     CREATE TABLE customers (
@@ -223,6 +249,8 @@ Normalization rules:
     UPDATE customers SET email = "tjenkins@landonhotel.com" WHERE customer_id = 1;
     DELETE FROM customers WHERE customer_id=26;
 
+
 ## Sources:
 - [Programming Foundations: Databases](https://www.linkedin.com/learning/programming-foundations-databases-2) by Scott Simpson (LinkedIn Learning)
-- [SQL | DDL, DQL, DML, DCL and TCL Commands](https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/)
+- [SQL | DDL, DQL, DML, DCL and TCL Commands](https://www.geeksforgeeks.org/sql-ddl-dql-dml-dcl-tcl-commands/) GeeksforGeeks article
+- [Node.js ORMs and why you shouldn’t use them](https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/) by Thomas Hunter on LogRocket
