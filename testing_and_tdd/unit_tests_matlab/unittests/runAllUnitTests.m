@@ -1,15 +1,27 @@
-function testResults = runAllUnitTests(varargin)
+function [allTestsPassed, testResults] = runAllUnitTests(varargin)
 % Run all unit tests and obtain test results. Optionally with coverage measurement for specific folders.
 %
-% INPUTS:
-%   withCoverage: [optional] string with value of 'withCoverage'
+% INPUTS - Any of the following strings may (optionally) be passed in as argument, in any order and combination:
+%   'testReportPdf'  - Generate the test report in PDF file format
+%   'testReportXml'  - Generate the test report in XML file format (JUnit-style)
+%   'testReportTap'  - Generate the test report in TAP file format
+%   'coverageMatlab' - Generate the code coverage report in Matlab popup window (Matlab profiler)
+%   'coverageXml'    - Generate the code coverage report in Cobertura XML file format
 %
 % OUTPUTS:
-%   testResults: TestResult (structure-like) array, containing info about each test case (duration, name, passed/failed, etc.)
+%   allTestsPassed - Logical (boolean), true if all tests were passed, false otherwise
+%   testResults    - TestResult (structure-like) array, containing info about each test case (duration, name, passed/failed, etc.)
 %
 % EXAMPLES:
-%   testResults = runAllUnitTests()
-%   testResults = runAllUnitTests('withCoverage')
+%   [allTestsPassed, testResults] = runAllUnitTests()
+%   [allTestsPassed, testResults] = runAllUnitTests('testReportPdf')
+%   [allTestsPassed, testResults] = runAllUnitTests('coverageMatlab')
+%   [allTestsPassed, testResults] = runAllUnitTests('coverageXml')
+%   [allTestsPassed, testResults] = runAllUnitTests('testReportPdf', 'coverageMatlab')
+%   [allTestsPassed, testResults] = runAllUnitTests('coverageMatlab', 'testReportPdf')
+%   [allTestsPassed, testResults] = runAllUnitTests('testReportPdf', 'coverageMatlab', 'coverageXml')
+%   FULL EXAMPLE:
+%   [allTestsPassed, testResults] = runAllUnitTests('testReportPdf', 'testReportXml', 'testReportTap', 'coverageMatlab', 'coverageXml')
 %
 %==========
 % NOTE 1:
@@ -58,61 +70,74 @@ function testResults = runAllUnitTests(varargin)
 %         end
 %     end
 %==========
+% NOTE 4:
+% For a quick overview of the test results, use "table(testResults)" in the Command Window.
+%==========
 % FURTHER INFO:
 %   https://www.mathworks.com/videos/matlab-unit-testing-framework-74975.html
 %   https://www.mathworks.com/help/matlab/class-based-unit-tests.html
+%   https://www.mathworks.com/help/matlab/ref/matlab.unittest.testcase-class.html
 %   https://www.mathworks.com/help/matlab/ref/matlab.unittest.plugins.codecoverageplugin-class.html
 %==========
 
-% Handle inputs:
-withCoverage = '';
-if nargin == 1
-    withCoverage = varargin{1};
-end
-
 % Setup test:
-[testRunner, prodPath, testPath] = setupTests();
+[testRunner, prodPath, testPath, artifactPath] = setupTests();
 
-% Optional coverage report (for the folders defined here):
+% Define folders to be included in the (optional) code coverage report:
 pathsToIncludeInCodeCoverage = {...
     fullfile(prodPath,'calculations'),...
     fullfile(prodPath,'utils')
     };
-if strcmp(withCoverage, 'withCoverage')
-    testRunner = extendTestRunnerWithCoverageMeasurement(testRunner, pathsToIncludeInCodeCoverage);
+
+% Handle optional arguments:
+if isCalledWith('testReportPdf', varargin)
+    testRunner = addTestReportPDF(testRunner, artifactPath, 'testReport.pdf');
+end
+if isCalledWith('testReportXml', varargin)
+    testRunner = addTestReportXML(testRunner, artifactPath, 'testReport.xml');
+end
+if isCalledWith('testReportTap', varargin)
+    testRunner = addTestReportTAP(testRunner, artifactPath, 'testReport.tap');
+end
+if isCalledWith('coverageMatlab', varargin)
+    testRunner = addCoverageReportMatlab(testRunner, pathsToIncludeInCodeCoverage);
+end
+if isCalledWith('coverageXml', varargin)
+    testRunner = addCoverageReportCoberturaXML(testRunner, pathsToIncludeInCodeCoverage, artifactPath, 'coverage.xml');
 end
 
-% Perform and teardown the tests:
-testSuite = createTestSuite(testPath);
+% Perform and teardown the tests, post-process test results:
+testSuite = createTestSuite();
 testResults = runTests(testRunner, testSuite);
 teardownTests(prodPath, testPath)
+allTestsPassed = postProcessTestResults(testResults, artifactPath);
 end
 
 
 %==============================
 % Local functions:
 %==============================
-function [testRunner, prodPath, testPath] = setupTests()
+function [testRunner, prodPath, testPath, artifactPath] = setupTests()
 import matlab.unittest.TestRunner
-testRunner = TestRunner.withTextOutput;
+testRunner = TestRunner.withTextOutput;  % INFO: https://www.mathworks.com/help/matlab/ref/matlab.unittest.testrunner.withtextoutput.html
 prodPath = useRelPath('../program');
 testPath = useRelPath('tests');
+artifactPath = useRelPath('artifacts');
 addpath(genpath(prodPath));
 addpath(genpath(testPath));
-end
-
-function testRunner = extendTestRunnerWithCoverageMeasurement(testRunner, pathsToIncludeInCodeCoverage)
-import matlab.unittest.plugins.CodeCoveragePlugin
-for i = 1 : length(pathsToIncludeInCodeCoverage)
-    % NOTE: 'CodeCoveragePlugin.forFolder' optionally takes a 2nd and 3rd argument: 'IncludeSubfolders',true
-    testRunner.addPlugin(CodeCoveragePlugin.forFolder(pathsToIncludeInCodeCoverage(i)));
+if ~exist(artifactPath, 'dir')
+    mkdir(artifactPath)
 end
 end
 
-function testSuite = createTestSuite(testPath)
+function testSuite = createTestSuite()
 import matlab.unittest.TestSuite
-testSuite = TestSuite.fromFolder(testPath,'IncludeSubfolders',true);
-% Alternative solution, for creating a test suite from a single file:
+testSuite = TestSuite.fromPackage('unittests','IncludingSubpackages',true);
+% =====
+% Alternative solutions for creating a test suite:
+% =====
+% testSuite = TestSuite.fromClass(?Bool2strTest);
+% testSuite = TestSuite.fromFolder(testPath,'IncludeSubfolders',true);
 % testSuite = TestSuite.fromFile(fullfile(testPath, 'utils', 'Bool2strTest.m'));
 end
 
@@ -127,7 +152,54 @@ rmpath(genpath(prodPath));
 rmpath(genpath(testPath));
 end
 
+function allTestsHavePassed = postProcessTestResults(testResults, artifactPath)
+allTestsHavePassed = all([testResults.Passed]);
+if ~allTestsHavePassed
+    save(fullfile(artifactPath,'results.mat'), 'testResults')
+end
+end
+
 function fullpath = useRelPath(path)
 [basepath,~,~] = fileparts(mfilename('fullpath'));
 fullpath = fullfile(basepath, path);
+end
+
+function isCalledWithFlag = isCalledWith(flag, varargin)
+flags = varargin{1};
+isCalledWithFlag = any(cellfun(@(x) strcmp(x,flag), flags));
+end
+
+%==============================
+% PLUGINS:
+%==============================
+function testRunner = addTestReportPDF(testRunner, artifactPath, nameOfPdf)
+import matlab.unittest.plugins.TestReportPlugin
+testRunner.addPlugin(TestReportPlugin.producingPDF(fullfile(artifactPath, nameOfPdf)));
+end
+
+function testRunner = addTestReportXML(testRunner, artifactPath, nameOfXml)
+import matlab.unittest.plugins.XMLPlugin
+testRunner.addPlugin(XMLPlugin.producingJUnitFormat(fullfile(artifactPath, nameOfXml)));
+end
+
+function testRunner = addTestReportTAP(testRunner, artifactPath, nameOfTap)
+import matlab.unittest.plugins.TAPPlugin
+import matlab.unittest.plugins.ToFile
+testRunner.addPlugin(TAPPlugin.producingOriginalFormat(ToFile(fullfile(artifactPath, nameOfTap))));
+end
+
+function testRunner = addCoverageReportMatlab(testRunner, pathsToIncludeInCodeCoverage)
+import matlab.unittest.plugins.CodeCoveragePlugin
+for i = 1 : length(pathsToIncludeInCodeCoverage)
+    % NOTE: for recursivity, 'CodeCoveragePlugin.forFolder' optionally takes an additional key-value argument pair: 'IncludeSubfolders',true
+    testRunner.addPlugin(CodeCoveragePlugin.forFolder(pathsToIncludeInCodeCoverage(i)));
+end
+end
+
+function testRunner = addCoverageReportCoberturaXML(testRunner, pathsToIncludeInCodeCoverage, artifactPath, nameOfCoberturaXml)
+import matlab.unittest.plugins.CodeCoveragePlugin
+import matlab.unittest.plugins.codecoverage.CoberturaFormat
+for i = 1 : length(pathsToIncludeInCodeCoverage)
+    testRunner.addPlugin(CodeCoveragePlugin.forFolder(pathsToIncludeInCodeCoverage(i),'Producing',CoberturaFormat(fullfile(artifactPath, nameOfCoberturaXml))));
+end
 end
