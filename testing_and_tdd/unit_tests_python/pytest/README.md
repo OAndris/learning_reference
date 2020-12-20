@@ -18,6 +18,9 @@ This folder demonstrates the use of "pytest", a popular unit test framework for 
     - `pytest -m <name>` runs the test methods which are marked using the **@pytest.mark.\<name>** decorator
     - `pytest --junitxml="result.xml"` runs the tests and creates a test result report (a JUnit-style XML file)
     - `pytest -n 4` runs tests in parallel, by multiple workers (4 in this case). First needs to be installed: `pip install pytest-xdist`
+    - `pytest --collect-only` shows a list of the tests without running them
+    - `pytest --lf` runs only the set of tests that failed at the last run, or all tests if none failed
+    - `pytest -x` stop after first failure
 - Fixtures:
     - `@pytest.fixture` can be used as a decorator to create a reusable function, which returns data that can be supplied to test methods (as an input)
     - A fixture method can even be accessed across multiple test files, but for that, it needs to be defined in a conftest.py file.
@@ -29,4 +32,6 @@ This folder demonstrates the use of "pytest", a popular unit test framework for 
 
 ## More info:
 - https://www.guru99.com/pytest-tutorial.html
+- https://gist.github.com/kwmiebach/3fd49612ef7a52b5ce3a/a62c6366b4442df3a50d867afe598fde403ccca7
 - https://docs.pytest.org/en/stable/goodpractices.html
+- https://docs.pytest.org/en/reorganize-docs/new-docs/user/commandlineuseful.html
