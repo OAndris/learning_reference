@@ -43,6 +43,7 @@ This folder demonstrates the use of "pytest", a popular unit test framework for 
         - **Pytest-cov** is a Python plugin to generate coverage reports (adds new command line options to pytest)
             - `pip install pytest-cov`
             - `pytest --cov=./` generates code coverage report for specified path (report to terminal)
+            - `pytest --cov=./ --cov-branch` enable branch coverage
             - `pytest --cov=./ --cov-report term` report to terminal
             - `pytest --cov=./ --cov-report term-missing` report to terminal and include missing line numbers
             - `pytest --cov=./ --cov-report term:skip-covered` report to terminal and skip fully covered files (include only files with less than 100% coverage)
@@ -50,6 +51,7 @@ This folder demonstrates the use of "pytest", a popular unit test framework for 
             - `pytest --cov=./ --cov-report html:coverage_html` report to HTML files (use specified folder name)
             - `pytest --cov=./ --cov-report xml` report to XML file (use default file name: "coverage.xml")
             - `pytest --cov=./ --cov-report xml:coverage.xml` report to XML file (use specified file name)
+            - Full, recommended example: `pytest --cov=./ --cov-branch --cov-report html`
 
 ## More info:
 - [Pytest tutorial, setup](https://www.guru99.com/pytest-tutorial.html)
