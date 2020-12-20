@@ -22,8 +22,9 @@ This folder demonstrates the use of "pytest", a popular unit test framework for 
     - `pytest --lf` runs only the set of tests that failed at the last run, or all tests if none failed
     - `pytest -x` stop after first failure
 - Fixtures:
-    - `@pytest.fixture` can be used as a decorator to create a reusable function, which returns data that can be supplied to test methods (as an input)
-    - A fixture method can even be accessed across multiple test files, but for that, it needs to be defined in a conftest.py file.
+    - `@pytest.fixture` can be used as a decorator to create a reusable function, which can perform shared tasks and return data
+    - Fixtures can be supplied to test methods as an input
+    - A fixture method can even be accessed across multiple test files, but for that, it needs to be defined in a `conftest.py` file
 - Parameterized tests:
     - `@pytest.mark.parametrize` can be used as a decorator to supply multiple sets of arguments to a test, and testing each with a single assertion (instead of using multiple assertions for multiple parameters)
 - Some other decorators:
