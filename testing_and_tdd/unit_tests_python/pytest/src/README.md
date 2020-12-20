@@ -1,0 +1,1 @@
+Using this specific folder structure is often recommended, as explained here: https://docs.pytest.org/en/stable/goodpractices.html
