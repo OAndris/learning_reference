@@ -38,3 +38,20 @@ def test_subtract(input1, input2, expected_result):
     assert calc.subtract(-10, -7) == -3
     """
     assert calc.subtract(input1, input2) == expected_result
+
+
+@pytest.mark.parametrize(
+    "numerator, denominator, expected_result", [
+        (0, 1, 0),
+        (1, 1, 1),
+        (1, 2, 0.5),
+        (7.5, 3, 2.5)
+    ]
+)
+def test_divide(numerator, denominator, expected_result):
+    """
+    "pytest.raises(ErrorType)" can be used as a context manager to test for expected exceptions.
+    """
+    assert calc.divide(numerator, denominator) == expected_result
+    with pytest.raises(ZeroDivisionError):
+        calc.divide(5, 0)
