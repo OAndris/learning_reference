@@ -8,7 +8,7 @@ def higher_than_5(num):
         return "Not higher than 5"
 
 def smaller_than_5(num):
-    if num < 5:
+    if num < 5:  # "if" clause intentionally not covered with tests to appear as missing in branch coverage
         return "Smaller than 5"
     else:
         return "Not smaller than 5"
