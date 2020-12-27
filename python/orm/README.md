@@ -78,7 +78,10 @@ Typically, ORMs make it easier and faster to start a project, and work well for 
 - **Cascade:**
     - Whenever operations (e.g. update or delete) are performed on parent objects, child objects might also need to suffer changes (e.g. be updated or deleted)
     - This "cascading" behavior is supported by both databases and ORM solutions (cascade update, cascade delete)
-
+- **Sessions:**
+    - Sessions are the implementation of the Unit of Work design pattern
+    - All modifications tracked by Sessions will be applied to the underlying database together, or none of them will
+    - They guarantee the consistency of the database
 
 ## Sources:
 - https://www.fullstackpython.com/object-relational-mappers-orms.html
