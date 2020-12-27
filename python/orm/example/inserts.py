@@ -12,6 +12,7 @@ from movie import Movie
 from stuntman import Stuntman
 
 # 2 - generate database schema (based on the declarations that we made while creating the four main classes)
+Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 # 3 - create a new session (from the session factory)
