@@ -5,11 +5,11 @@ Persisting Data with SQLAlchemy ORM
 # 1 - imports
 from datetime import date
 
-from actor import Actor
 from base import Session, engine, Base
-from contact_details import ContactDetails
-from movie import Movie
-from stuntman import Stuntman
+from model.actor import Actor
+from model.contact_details import ContactDetails
+from model.movie import Movie
+from model.stuntman import Stuntman
 
 # 2 - generate database schema (based on the declarations that we made while creating the four main classes)
 Base.metadata.drop_all(engine)
