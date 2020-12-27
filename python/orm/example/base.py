@@ -1,18 +1,13 @@
+import json
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
 # Database connection info (https://docs.sqlalchemy.org/en/13/core/engines.html):
-database_connection_info = {
-    'dialect':  'postgresql',
-    'driver':   '',  # if not specified, the default DBAPI of the PostgreSQL dialect will be used (psycopg2)
-    'username': 'postgres',
-    'password': '',
-    'host':     'localhost',
-    'port':     5432,
-    'database': 'sqlalchemy_tutorial'
-}
+# NOTE: if 'driver' is not specified, the default DBAPI will be used (for the 'postgresql' dialect, it is the 'psycopg2' driver)
+with open('settings/database.json') as f:
+    database_connection_info = json.load(f)
 
 db_url = (
     '{dialect}://{username}:{password}@{host}:{port}/{database}'.format(**database_connection_info)

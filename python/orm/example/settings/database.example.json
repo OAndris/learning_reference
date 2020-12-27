@@ -1,0 +1,9 @@
+{
+    "dialect":  "postgresql",
+    "driver":   "",
+    "username": "postgres",
+    "password": "",
+    "host":     "localhost",
+    "port":     5432,
+    "database": "sqlalchemy_tutorial"
+}
