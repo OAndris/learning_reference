@@ -24,3 +24,6 @@ class ContactDetails(Base):
         self.phone_number = phone_number
         self.address = address
         self.actor = actor
+    
+    def __repr__(self):
+        return f"{type(self)} {self.phone_number}, {self.address}, {self.actor.name}"

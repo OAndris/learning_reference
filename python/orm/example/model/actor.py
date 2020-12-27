@@ -13,3 +13,6 @@ class Actor(Base):
     def __init__(self, name, birthday):
         self.name = name
         self.birthday = birthday
+    
+    def __repr__(self):
+        return f"{type(self)} {self.name}, {self.birthday}"

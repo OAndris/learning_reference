@@ -28,3 +28,6 @@ class Movie(Base):
     def __init__(self, title, release_date):
         self.title = title
         self.release_date = release_date
+
+    def __repr__(self):
+        return f"{type(self)} {self.title}, {self.release_date}"

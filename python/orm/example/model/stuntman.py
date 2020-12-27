@@ -28,3 +28,6 @@ class Stuntman(Base):
         self.name = name
         self.active = active
         self.actor = actor
+
+    def __repr__(self):
+        return f"{type(self)} {self.name}, {self.active}, {self.actor.name}"
