@@ -83,8 +83,77 @@ def insert_records():
     session.close()
 
 
+def query_data():
+    """
+    Steps:
+    1) Extract a session (from the session factory)
+    2) From the session, extract a Query Object associated to a mapped class
+    3) Use the Query Object's methods for querying
+    -----
+    The Query API provides dozens of useful functions, such as:
+    - count(): Returns the total number of rows of a query.
+    - filter(): Filters the query by applying a criteria.
+    - delete(): Removes from the database the rows matched by a query.
+    - distinct(): Applies a distinct statement to a query.
+    - exists(): Adds an exists operator to a subquery.
+    - first(): Returns the first row in a query.
+    - get(): Returns the row referenced by the primary key parameter passed as argument.
+    - join(): Creates a SQL join in a query.
+    - limit(): Limits the number of rows returned by a query.
+    - order_by(): Sets an order in the rows returned by a query.
+    """
+
+    session = Session()
+
+    print('All movies:')
+    movies = session.query(Movie).all()
+    for movie in movies:
+        print(f'{movie.id} - {movie.title} was released on {movie.release_date}')
+    print('')
+
+    print('Movies released since 15-01-01:')
+    # movies = session.query(Movie).filter(Movie.release_date >= date(2015, 1, 1)).all()
+    movies = (session.query(Movie)
+        .filter(Movie.release_date >= date(2015, 1, 1))
+        .all()
+    )
+    for movie in movies:
+        print(f'{movie.id} - {movie.title} was released since 2015 (on {movie.release_date})')
+    print('')
+
+    print('Movies that Dwayne Johnson participated:')
+    movies = (session.query(Movie)
+        .join(Actor, Movie.actors)
+        .filter(Actor.name == 'Dwayne Johnson')
+        .all()
+    )
+    for movie in movies:
+        print(f'{movie.id} - {movie.title}')
+    print('')
+
+    print('Actors having a house in Glendale:')
+    actors_from_glendale = (session.query(Actor)
+        .join(ContactDetails)
+        .filter(ContactDetails.address.ilike('%glendale%'))
+        .all()
+    )
+    for actor in actors_from_glendale:
+        print(f'{actor.id} - {actor.name}')
+
+
+def query_metadata():
+    session = Session()
+    for mapped_class in (Actor, ContactDetails, Movie, Stuntman):
+        print(f'There are {session.query(mapped_class).count()} record(s) in {mapped_class.__tablename__}')
+
+
+
+
+
 if __name__ == '__main__':
-    print_models()
+    # print_models()
     # drop_schema()
     # create_schema()
     # insert_records()
+    # query_data()
+    query_metadata()
