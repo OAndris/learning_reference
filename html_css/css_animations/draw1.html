@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #svg {
+            box-sizing: border-box;
+            display: flex;
+            border: 1px solid black;
+            height: 500px;
+            width: 50%;
+            min-width: 500px;
+            margin: 2.5em;
+            overflow-x: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draw in the area by holding the left mouse button down!</h1>
+    <svg id="svg"></svg>
+</body>
+<script>
+    const svg = d3.select('#svg');
+    let isDrawing = false;
+
+    function drawPoint() {
+        if (!isDrawing) return;
+        const coords = d3.mouse(this);
+        svg.append('circle')
+           .attr('cx', coords[0])
+           .attr('cy', coords[1])
+           .attr('r', 5)
+           .style('fill', 'black');
+    };
+
+    svg.on('mousedown', () => isDrawing = true);
+    svg.on('mouseup',  () => isDrawing = false);
+    svg.on('mousemove', drawPoint);
+</script>
+</html>
