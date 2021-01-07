@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+        body {
+            margin: 1.25em 2.5em;
+        }
+        #drawing-area {
+            border: 1px solid black;
+            height: 500px;
+            width: 50%;
+            min-width: 500px;
+        }
+        #options {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Draw something nice</h1>
+    <div id="options">
+        <select name="" id="color-picker">
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+        </select>
+        <select name="" id="thickness-picker">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <button id="erase">Erase</button>
+    </div>
+    <svg id="drawing-area"></svg>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const state = {
+            isDrawing: false,
+            points: [],
+            lines: [],
+            svg: null
+        };
+
+        function render() {
+            state.svg = d3.select('#drawing-area');
+
+            state.svg.on('mousedown', function() {
+                state.isDrawing = true;
+                const coords = d3.mouse(this);
+                drawPoint(coords[0], coords[1], false);
+            });
+            state.svg.on('mouseup', () => {
+                state.isDrawing = false;
+            });
+            state.svg.on('mousemove', function() {
+                if (!state.isDrawing) return;
+                const coords = d3.mouse(this);
+                drawPoint(coords[0], coords[1], true);
+            });
+
+            document.querySelector('#erase').onclick = () => {
+                for (let i = 0; i < state.points.length; i++) {
+                    state.points[i].remove();
+                }
+                for (let i = 0; i < state.lines.length; i++) {
+                    state.lines[i].remove();
+                }
+                state.points = [];
+                state.lines = [];
+            };
+        };
+
+        function drawPoint(x, y, connect) {
+            const color = document.querySelector('#color-picker').value;
+            const thickness = document.querySelector('#thickness-picker').value;
+            if (connect) {
+                const lastPoint = state.points[state.points.length-1];
+                const line = state.svg.append('line')
+                                .attr('x1', lastPoint.attr('cx'))
+                                .attr('y1', lastPoint.attr('cy'))
+                                .attr('x2', x)
+                                .attr('y2', y)
+                                .attr('stroke-width', thickness*2)
+                                .style('stroke', color);
+                state.lines.push(line);
+            }
+            const point = state.svg.append('circle')
+                            .attr('cx', x)
+                            .attr('cy', y)
+                            .attr('r', thickness)
+                            .style('fill', color);
+            
+            state.points.push(point);
+        }
+
+        render();
+    });
+</script>
+</html>
