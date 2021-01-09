@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <h1>Click on the gray circles!</h1>
+    <svg id="svg" style="width:100%; height:800px"></svg>
+</body>
+<script>
+    const svg = d3.select('#svg');
+    
+    svg.append('rect')
+       .attr('x', 100)
+       .attr('y', 10)
+       .attr('width', 200)
+       .attr('height', 500)
+       .style('fill', 'black');
+    
+    const redCircle = svg.append('circle')
+                   .attr('cx', 200)
+                   .attr('cy', 100)
+                   .attr('r', 75)
+                   .style('fill', 'grey');
+
+    const yellowCircle = svg.append('circle')
+                   .attr('cx', 200)
+                   .attr('cy', 260)
+                   .attr('r', 75)
+                   .style('fill', 'grey');
+
+    const greenCircle = svg.append('circle')
+                   .attr('cx', 200)
+                   .attr('cy', 420)
+                   .attr('r', 75)
+                   .style('fill', 'grey');
+    
+    redCircle.on('click', () => {
+        redCircle.style('fill', 'red');
+        yellowCircle.style('fill', 'grey');
+        greenCircle.style('fill', 'grey');
+    });
+
+    yellowCircle.on('click', () => {
+        redCircle.style('fill', 'grey');
+        yellowCircle.style('fill', 'yellow');
+        greenCircle.style('fill', 'grey');
+    });
+
+    greenCircle.on('click', () => {
+        redCircle.style('fill', 'grey');
+        yellowCircle.style('fill', 'grey');
+        greenCircle.style('fill', 'green');
+    });
+</script>
+</html>
