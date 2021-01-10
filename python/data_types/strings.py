@@ -16,6 +16,19 @@ print('. '.join([substring.capitalize() for substring in phrase.split(', ')]))
 print(f'Number of "make" in the phrase: {phrase.count("make")}')
 print()
 
+names = 'Tom Jacob Martha Jane'.split()
+ages = (37, 121, 30, 5)
+for name, age in zip(names, ages):
+    print(f'{name:<10} {age}')  # ":<10" indicates 10 characters (in total), and left-aligned text
+print('')
+for name, age in zip(names, ages):
+    print(f'{name:^10} {age}')  # ":^10" indicates 10 characters (in total), and centered-aligned text
+print('')
+for name, age in zip(names, ages):
+    print(f'{name:>10} {age:>03}')  # ":>10" indicates 10 characters (in total), and right-aligned text. ":>03" indicates 3 digits, preceeded by zeros if needed
+print('')
+
+
 x = 5
 y = 17
 print('{} {}'.format(x, y))
