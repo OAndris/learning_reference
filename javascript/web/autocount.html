@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Counter:
+            let counter = 0;
+            document.querySelector('h2').innerHTML = counter;
+            setInterval(function count() {
+                counter++;
+                document.querySelector('h2').innerHTML = counter;
+            }, 1000);
+
+            // Saving:
+            document.querySelector('#save').onclick = () => {
+                localStorage.setItem('counter_value', document.querySelector('h2').innerHTML);
+            }
+
+            // Restoring:
+            document.querySelector('#restore').onclick = () => {
+                counter = localStorage.getItem('counter_value');
+                document.querySelector('h2').innerHTML = counter;
+            }
+            
+            // Reset:
+            document.querySelector('#reset').onclick = () => {
+                counter = 0;
+                document.querySelector('h2').innerHTML = counter;
+            }
+        })
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            text-transform: uppercase;
+            color: lightcoral;
+        }
+        h2 {
+            font-size: 30rem;
+            margin: 5vh;
+        }
+        button {
+            padding: 0.75em 1.5em;
+            width: 15em;
+            background: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number of seconds spent on this site:</h1>
+    <div>
+        <button id="save">Save current value</button>
+        <button id="restore">Restore last saved value</button>
+        <button id="reset">Reset value</button>
+    </div>
+    <h2></h2>
+</body>
+</html>
