@@ -183,6 +183,48 @@ Remove every untracked changes (everything that is not in the repository or in t
 
 `git commit --amend -m "Short, meaningful message"` (add new changes to the most recent commit and/or change the commit message)
 
+### Git Stash:
+
+Basics:
+
+-   Git stash is useful when you need to quickly switch context and work on something else, but you aren't ready to commit
+-   It stores your changes locally, making it possible to reapply them later (or even enables you to apply the same set of changes to multiple branches)
+-   By default, only staged/unstaged changes are stashed (optionally, untracked/ignored files can also be included)
+
+**Get info about stashes:**
+
+`git stash list` (get list of stashes)
+
+`git stash show` (show summary of stashed changes)
+
+`git stash show -p` (show the full diff of a stash by adding the -p or --patch option)
+
+**Stash changes:**
+
+`git stash` (stash staged/unstaged changes)
+
+`git stash save "Short, meaningful message"` (include a short description for easier identification later on)
+
+`git stash -u` (include untracked files by adding the -u or --include-untracked option)
+
+`git stash -a` (include untracked/ignored files by adding the -a or --all option)
+
+**Reapply changes stored in stashes:**
+
+`git stash pop` (reapply the most recently stashed changes, then remove the changes from the stash)
+
+`git stash apply` (reapply the most recently stashed changes, and keep the changes in the stash)
+
+`git stash apply stash@{n}` (specify which stash to reapply)
+
+`git stash apply n` (shorter version for specifying which stash to reapply)
+
+**Cleaning up stashes:**
+
+`git stash drop stash@{n}` (delete a particular stash)
+
+`git stash clear` (delete all stashes)
+
 ### Other:
 
 `git fetch -p` (after fetching this "prune" flag, branches which no longer exist on the remote will also be deleted locally)
@@ -198,3 +240,4 @@ Remove every untracked changes (everything that is not in the repository or in t
 -   [Learn Git in 20 minutes](https://www.youtube.com/watch?v=Y9XZQO1n_7c) by Code Insights (Youtube)
 -   [How to Delete a Git Branch Both Locally and Remotely](https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/) by freeCodeCamp (article)
 -   [Push a new local branch to a remote Git repository and track it too](https://forum.freecodecamp.org/t/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too/13222) by freeCodeCamp (article)
+-   [Git stash](https://www.atlassian.com/git/tutorials/saving-changes/git-stash) by Atlassian
