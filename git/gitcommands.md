@@ -1,25 +1,25 @@
-# git
+# Git
 
-## Some important concepts of Git
+This file is intended to serve as a reference to the most important **concepts**, **commands**, and **workflows** of Git.
+
+Some important concepts of Git:
 
 -   **Distributed Version Control** (Local Repository and Remote Repository)
 -   **Three Tree Acrhitecture** (Working Directory, Staging Area, Repository)
 
 ---
 
----
-
 ## Workflows
 
-### Workflow: Initialize a repository
+### Workflow #1 - Initialize a repository
 
-Clone an existing repository:
+**Option #1 - Clone an existing repository:**
 
 ```
 git clone https://github.com/OAndris/react-packages-demo.git
 ```
 
-Create a new repository on the command line:
+**Option #2 - Create a new repository on the command line:**
 
 ```
 echo "# my-new-repo" >> README.md
@@ -31,7 +31,7 @@ git remote add origin https://github.com/OAndris/my-new-repo.git
 git push -u origin main
 ```
 
-Or push an existing repository from the command line:
+**Option #3 - Or push an existing repository from the command line:**
 
 ```
 git remote add origin https://github.com/OAndris/my-new-repo.git
@@ -39,7 +39,7 @@ git branch -M main
 git push -u origin main
 ```
 
-### Workflow: Full example
+### Workflow #2 - Full Git example
 
 `git checkout -B my_branch` (create a new branch and switch to it. Alternatively, `git branch my_branch` creates and `git checkout my_branch` switches to it)
 
@@ -63,7 +63,7 @@ git push -u origin main
 
 `git push origin --delete my_branch` (delete branch remotely)
 
-### Workflow: Push a new local branch to a new remote branch
+### Workflow #3 - Push a new local branch to a new remote branch
 
 `git checkout -b my_branch` (create and checkout new local branch)
 
@@ -75,8 +75,6 @@ git push -u origin main
 
 ---
 
----
-
 ## Git commands
 
 ### Setup
@@ -85,11 +83,9 @@ git push -u origin main
 
 `git clone`
 
----
-
 `git config`
 
-`git config user.name "My Name"` (potential flags also available, such as `git config --global user.name`)
+`git config user.name "My Name"` (potential flags are also available, such as `git config --global user.name`)
 
 `git config user.email "my_email@domain.com"`
 
@@ -105,11 +101,13 @@ git push -u origin main
 
 `git branch`
 
----
+**History of commits:**
 
 `git log`
 
 `git log -n 5`
+
+`git log --oneline`
 
 `git log --since=2020-06-20`
 
@@ -117,15 +115,13 @@ git push -u origin main
 
 `git log --grep="init"`
 
-`git log --oneline`
+**Display the changes of a specific commit:**
 
----
-
-`git show <hash of the commit>` (displays the changes of a specific commit)
+`git show <hash of the commit>`
 
 `git show <hash of the commit> --color-words`
 
----
+**Show differences:**
 
 `git diff` (shows the changes between the working directory and the staging area)
 
@@ -137,6 +133,8 @@ git push -u origin main
 
 ### Working Directory
 
+**Add files/folders to the staging area:**
+
 `git add .`
 
 `git add file.txt`
@@ -145,7 +143,7 @@ git push -u origin main
 
 `git add -A`
 
----
+**Remove or change files:**
 
 `git rm file_to_delete.txt`
 
@@ -155,9 +153,7 @@ git push -u origin main
 
 `git checkout -- file.txt` (undo changes in working directory)
 
----
-
-Remove every untracked changes (everything that is not in the repository or in the staging tree):
+**Remove every untracked changes (everything that is not in the repository or in the staging tree):**
 
 `git clean -n` (check what would happen if git clean was actually performed)
 
@@ -171,7 +167,7 @@ Remove every untracked changes (everything that is not in the repository or in t
 
 `git revert <hash of the commit>` (revert the changes of a specific commit)
 
----
+**Commit:**
 
 `git commit -m "Short, meaningful message"`
 
@@ -183,6 +179,48 @@ Remove every untracked changes (everything that is not in the repository or in t
 
 `git commit --amend -m "Short, meaningful message"` (add new changes to the most recent commit and/or change the commit message)
 
+### Git Stash:
+
+**Background info:**
+
+-   Git stash is useful when you need to quickly switch context and work on something else, but you aren't ready to commit
+-   It stores your changes locally, making it possible to reapply them later (or even enables you to apply the same set of changes to multiple branches)
+-   By default, only staged/unstaged changes are stashed (optionally, untracked/ignored files can also be included)
+
+**Get info about stashes:**
+
+`git stash list` (get list of stashes)
+
+`git stash show` (show summary of stashed changes)
+
+`git stash show -p` (show the full diff of a stash by adding the -p or --patch option)
+
+**Stash changes:**
+
+`git stash` (stash staged/unstaged changes)
+
+`git stash save "Short, meaningful message"` (include a short description for easier identification later on)
+
+`git stash -u` (include untracked files by adding the -u or --include-untracked option)
+
+`git stash -a` (include untracked/ignored files by adding the -a or --all option)
+
+**Reapply changes stored in stashes:**
+
+`git stash pop` (reapply the most recently stashed changes, then remove the changes from the stash)
+
+`git stash apply` (reapply the most recently stashed changes, and keep the changes in the stash)
+
+`git stash apply stash@{n}` (specify which stash to reapply)
+
+`git stash apply n` (shorter version for specifying which stash to reapply)
+
+**Cleaning up stashes:**
+
+`git stash drop stash@{n}` (delete a particular stash)
+
+`git stash clear` (delete all stashes)
+
 ### Other:
 
 `git fetch -p` (after fetching this "prune" flag, branches which no longer exist on the remote will also be deleted locally)
@@ -191,6 +229,8 @@ Remove every untracked changes (everything that is not in the repository or in t
 
 `git branch -d mybranch` (delete branch)
 
+---
+
 ## Sources:
 
 -   [Git Tutorial for Beginners: Command-Line Fundamentals](https://www.youtube.com/watch?v=HVsySz-h9r4) by Corey Schafer (Youtube)
@@ -198,3 +238,4 @@ Remove every untracked changes (everything that is not in the repository or in t
 -   [Learn Git in 20 minutes](https://www.youtube.com/watch?v=Y9XZQO1n_7c) by Code Insights (Youtube)
 -   [How to Delete a Git Branch Both Locally and Remotely](https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/) by freeCodeCamp (article)
 -   [Push a new local branch to a remote Git repository and track it too](https://forum.freecodecamp.org/t/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too/13222) by freeCodeCamp (article)
+-   [Git stash](https://www.atlassian.com/git/tutorials/saving-changes/git-stash) by Atlassian
