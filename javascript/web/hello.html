@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('#form').onsubmit = function() {
+                alert(`Hello ${document.querySelector('.name').value}!`);
+            }
+        })
+    </script>
+</head>
+<body>
+    <form id="form">
+        <input type="text" class="name" placeholder="Type your name" autofocus autocomplete="off">
+        <button>Submit</button>
+    </form>
+</body>
+</html>
