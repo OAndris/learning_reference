@@ -16,10 +16,13 @@
 
 **Setup:**
 
-`tsc --init` generates the "tsconfig.json" file (in which, e.g. the "outDir" property can be defined, to create a build folder for JS files that are compiled by TS)
+`tsc --init` generates the **"tsconfig.json"** file (in which, e.g. the "outDir" property can be defined, to create a build folder for JS files that are compiled by TS)
 
-NOTE: The contents of the "tsconfig.json" file are only used if no files are passed to the "tsc" CLI (just run "tsc" itself). From the documentation: "When input files are specified on the command line, tsconfig.json files are ignored.".
+NOTE: The contents of the "tsconfig.json" file are only used if no files are passed to the "tsc" CLI (just run `tsc` itself). From the documentation: "When input files are specified on the command line, tsconfig.json files are ignored.".
+
+`tsc -w` compile according to the settings file ("tsconfig.json") and watch for changes
 
 ## Links:
 
+-   [Official TypeScript site](https://www.typescriptlang.org/)
 -   [TypeScript Crash Course](https://www.youtube.com/watch?v=rAy_3SIqT-E) by Traversy Media

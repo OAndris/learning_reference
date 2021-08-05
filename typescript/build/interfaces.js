@@ -8,6 +8,7 @@ var interfacesDemo = function () {
         console.log(todo.title + ': ' + todo.text);
     }
     var myTodo = { title: 'Trash', text: 'Take out trash' };
+    console.log('===== INTERFACES.JS OUTPUT =====');
     showTodo(myTodo);
 };
 interfacesDemo();

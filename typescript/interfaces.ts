@@ -16,6 +16,7 @@ const interfacesDemo = () => {
 
     let myTodo = { title: 'Trash', text: 'Take out trash' };
 
+    console.log('===== INTERFACES.JS OUTPUT =====');
     showTodo(myTodo);
 };
 
