@@ -40,3 +40,41 @@ const arrayDestructuringDemo = () => {
     console.log(sum(1, 2, 3, 4, 5));
 };
 arrayDestructuringDemo();
+
+const objectDestructuringDemo = () => {
+    console.log('\n*********** OBJECT DESTRUCTURING ***********');
+
+    // Save values directly to new variables (instead of "const a = obj[0];"):
+    const obj1 = { a: 1, b: 2, c: 3 };
+    const { a, b, c } = obj1;
+    console.log(a, b, c);
+
+    // Destructuring only a number of specified properties is also possible:
+    const obj2 = { x: 'a', y: 'b', z: 'c' };
+    const { y } = obj2;
+    console.log(y);
+
+    // Destructuring from nested objects is also possible:
+    const nestedObj = { xx: 'a', yy: 'b', zz: { aa: 1, bb: 2, cc: 3 } };
+    const {
+        zz,
+        zz: { aa, cc },
+    } = nestedObj;
+    console.log(zz);
+    console.log(aa, cc);
+
+    // Object destructuring can also be used for creating a copy:
+    const copiedObj = { ...nestedObj };
+    console.log(copiedObj);
+    copiedObj['zz'] = { x: 1 };
+    console.log(copiedObj);
+    console.log(nestedObj);
+
+    // The new object can also be extended with new property-value pairs during creation:
+    const newObj = {
+        ...nestedObj,
+        a: 1,
+    };
+    console.log(newObj);
+};
+objectDestructuringDemo();
