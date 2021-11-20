@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Responsive Images - Examples for "Pixel Resolution" and "Art Direction"</title>
+    </head>
+
+    <body>
+        <h1>Responsive Images</h1>
+        <p>Examples for "Pixel Resolution" and "Art Direction".</p>
+        <p>
+            Note that these techniques alone do not solve all problems regarding responsive web design. They should be
+            used together with responsive CSS (e.g. flexbox, CSS grid, relative width/height, max-width, max-height, img
+            object-fit, media queries, etc.). But these two HTML based techniques can save a lot on bandwidth and load
+            time, thus adding a lot to the performance of the website, by enabling the browser to load the smallest
+            possible image for each screen size and screen resolution.
+        </p>
+
+        <hr />
+
+        <h2>"Pixel Resolution" (resolution switching)</h2>
+        <p>
+            From MDN:
+            <i
+                >"The problem whereby you want to serve smaller image files to narrow-screen devices, as they don't need
+                huge images like desktop displays do — and to serve different resolution images to high density/low
+                density screens. You can solve this problem using vector graphics (SVG images) and the srcset with sizes
+                attributes."
+            </i>
+        </p>
+        <p>In this example:</p>
+        <ul>
+            <li>If the screen width is 900px or smaller, the browser loads a JPG with 640px width (96 KB).</li>
+            <li>If the screen width is larger than 900px, the browser loads a JPG with 1280px width (318 KB).</li>
+        </ul>
+        <p>The loaded picture:</p>
+        <img
+            srcset="goat-landscape-640px.jpg 640w, goat-landscape-1280px.jpg 1280w"
+            sizes="(max-width: 900px) 640px,
+                1280px"
+            src="goat-landscape-1280px.jpg"
+            alt=""
+        />
+
+        <hr />
+
+        <h2>"Art Direction" (picture switching)</h2>
+        <p>
+            From MDN:
+            <i
+                >"The problem whereby you want to serve cropped images for different layouts — for example a landscape
+                image showing a full scene for a desktop layout, and a portrait image showing the main subject zoomed in
+                for a mobile layout. You can solve this problem using the picture element."
+            </i>
+        </p>
+        <p>In this example:</p>
+        <ul>
+            <li>
+                If the screen width is 900px or smaller, the browser loads a portrait JPG (which is not only smaller in
+                size than the large landscape image, but it also allows to focus more on the most important detail of
+                the original picture, potentially).
+            </li>
+            <li>If the screen width is larger than 900px, the browser loads a landscape JPG.</li>
+        </ul>
+        <p>If the browser doesn't support the "picture" HTML element, the default (landscape) JPG gets loaded.</p>
+        <p>The loaded picture:</p>
+        <picture>
+            <source media="(max-width: 900px)" srcset="goat-portrait-640px.jpg" />
+            <img src="goat-landscape-1280px.jpg" alt="" />
+        </picture>
+
+        <hr />
+        <p>Useful link, and the source of this simplified example:</p>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images"
+            >https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+        </a>
+    </body>
+</html>
