@@ -1,5 +1,5 @@
 """
-TASK:
+TASK ("buy low, sell high"):
 Given a stock's price history as a sequence, and assuming that you are only allowed to make one purchase and one sale, what is the maximum profit that can be obtained?
 For example, given prices = (20, 18, 14, 17, 20, 21, 15), the max profit would be 7, from buying at 14 and selling at 21.
 
