@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .arrows {
+                display: flex;
+                justify-content: center;
+                margin: 3em 1em;
+                height: 4em;
+            }
+            .arrow {
+                border-bottom: 2em solid transparent;
+                border-left: 2em solid #b31f1f;
+                border-top: 2em solid transparent;
+                height: 0;
+                width: 0;
+            }
+            .arrow-hollow {
+                border-bottom: 2em solid #b31f1f;
+                border-left: 2em solid transparent;
+                border-top: 2em solid #b31f1f;
+                height: 0;
+                margin-left: -10px;
+                width: 0;
+            }
+            .rectangle {
+                background-color: #b31f1f;
+                width: 10em;
+            }
+            .left {
+                border-radius: 2em 0em 0em 2em;
+            }
+            .right {
+                border-radius: 0em 2em 2em 0em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="arrows">
+            <div class="arrow"></div>
+            <div class="arrow-hollow"></div>
+        </div>
+        <div class="arrows">
+            <div class="rectangle left"></div>
+            <div class="arrow"></div>
+
+            <div class="arrow-hollow"></div>
+            <div class="rectangle"></div>
+            <div class="arrow"></div>
+
+            <div class="arrow-hollow"></div>
+            <div class="rectangle right"></div>
+        </div>
+    </body>
+</html>
