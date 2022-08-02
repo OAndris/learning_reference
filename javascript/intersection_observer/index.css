@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#toggle-layout-button {
+    margin: 1em auto 2em;
+    padding: 0.75em 1.5em;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px gray;
+}
+
+#card-container {
+    padding: 1em 3em;
+    align-items: center;
+    gap: 1rem;
+}
+#card-container.column {
+    display: flex;
+    flex-direction: column;
+}
+#card-container.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d3cbff;
+    border: 1px solid black;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    height: 11em;
+    width: 11em;
+    transform: translateX(120px);
+    opacity: 0;
+    transition-duration: 500ms;
+}
+
+.card.show {
+    transform: translateX(0px);
+    opacity: 1;
+}
+
+.card.lazy {
+    background-color: #faebd7;
+}
