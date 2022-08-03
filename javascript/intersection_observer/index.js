@@ -31,8 +31,8 @@ const onScreenObserver = new IntersectionObserver(
     },
     // The options object has three, optional properties:
     {
-        threshold: 1, // execute the callback when this proportion of the element is on screen (1 means 100% of the element, 0.5 means 50%, 0 means as soon as the first pixel is becomes visible). Defaults to 0
-        // rootMargin: '100px', // margin around the root, enabling us to offset the triggering of the callback (e.g. a value of '100px' will cause the callback to fire while the target is still 100px away from entering the viewport - useful for lay-loading images). Default to all zeros
+        threshold: 1, // execute the callback when this proportion of the element is on screen (1 means 100% of the element, 0.5 means 50%, 0 means as soon as the first pixel enters the viewport). Defaults to 0
+        // rootMargin: '100px', // margin around the root, enabling us to offset the triggering of the callback (e.g. a value of '100px' will cause the callback to fire while the target is still 100px away from entering the viewport - useful for lazy-loading images). Defaults to all zeros
         // root: document.querySelector('.scrollable-parent-container'), // the element that is used as the viewport for checking visibility of the target. Must be the ancestor of the target and must scrollable. Defaults to the browser viewport if not specified or if null
     }
 );
@@ -55,6 +55,9 @@ const lastCardOberserver = new IntersectionObserver((entries) => {
 }, {});
 lastCardOberserver.observe(document.querySelector('.card:last-child'));
 
+/* ==================================================================
+Other stuff, unrelated to the Intersection Observer API itself:
+================================================================== */
 const cardContainer = document.querySelector('#card-container');
 function loadNewCards() {
     for (let i = 0; i < 5; i++) {
@@ -66,10 +69,6 @@ function loadNewCards() {
         cardContainer.append(card);
     }
 }
-
-/* ==================================================================
-Other stuff, unrelated to the Intersection Observer API itself:
-================================================================== */
 document.querySelector('#toggle-layout-button').addEventListener('click', () => {
     cardContainer.className = cardContainer.className === 'column' ? 'grid' : 'column';
 });
