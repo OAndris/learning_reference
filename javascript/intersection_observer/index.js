@@ -15,7 +15,7 @@ ANIMATING APPEARANCE OF ELEMENTS:
 const onScreenObserver = new IntersectionObserver(
     // The intersection oberserver takes 2 arguments: a callback function and an options object.
     (entries) => {
-        // The callback function automatically receives an array containing all the elements that we are observing that has changed its observation (whether it intersects or not) in that period of time.
+        // The callback function automatically receives an array containing all the elements that we are observing that have changed its observation (whether it intersects or not) in that period of time.
         entries.forEach(({ target, isIntersecting }) => {
             /* Each entry has the following properties (plus a few more, less important properties):
             target --- the element that we are observing
