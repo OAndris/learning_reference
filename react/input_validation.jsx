@@ -12,7 +12,7 @@ Visualizations:
 - http://demo.nimius.net/debounce_throttle/
 - https://codepen.io/chriscoyier/pen/vOZNQV
 
-NOTE: The following code snippet requires React, but it can be easily tested for example at https://stackblitz.com/
+NOTE: The following code snippets require React and are not intented to be executed here, but they can be easily tested for example at https://stackblitz.com/
 */
 
 /* =========================
@@ -48,3 +48,38 @@ const App = () => {
 };
 
 export default App;
+
+/* =========================
+DEBOUNCE WITH CUSTOM HOOK
+========================= */
+import React, { useState, useEffect } from 'react';
+
+const useDebounce = (value, delay = 300) => {
+    const [debouncedValue, setDebounceValue] = useState(value);
+    useEffect(() => {
+        const timer = setTimeout(() => setDebounceValue(value), delay);
+        return () => clearTimeout(timer);
+    }, [value, delay]);
+    return debouncedValue;
+};
+
+export default function App() {
+    const [value, setValue] = useState('');
+    const debouncedValue = useDebounce(value);
+
+    useEffect(() => {
+        console.log(`Debounced value of ${debouncedValue}`); // to be used potentially for e.g. an API call
+    }, [debouncedValue]);
+
+    const onChange = (e) => setValue(e.target.value);
+    return (
+        <div>
+            <input type="text" value={value} onChange={onChange} />
+        </div>
+    );
+}
+
+/* =========================
+THROTTLE
+========================= */
+// TODO
