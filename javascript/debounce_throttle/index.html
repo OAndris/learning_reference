@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="debounceAndThrottle.js" defer></script>
+    </head>
+    <body>
+        <h1>Debounce & Throttle example</h1>
+        <p>
+            Both debounce and throttle are used for delaying the firing of callbacks. They can improve user experience,
+            reduce the number of unnecessary API calls and save both bandwidth and money.
+        </p>
+        <p>
+            <strong>Debounce use case examples:</strong> performing validation and/or sending API request only after the
+            user has probably stopped typing.
+        </p>
+        <p>
+            <strong>Throttle use case examples:</strong> eager validation of longer inputs, and/or monitoring events
+            like resize, scroll and mouse movement.
+        </p>
+        <hr />
+        <section>
+            <h2>Input field</h2>
+            <input type="text" id="input" autofocus />
+            <p><strong>Default:</strong><span id="default"></span></p>
+            <p><strong>Debounce:</strong><span id="debounce"></span></p>
+            <p><strong>Throttle:</strong><span id="throttle"></span></p>
+        </section>
+        <hr />
+        <section>
+            <h2>Mouse movement</h2>
+            <p><strong>Default:</strong><span id="defaultMouse"></span></p>
+            <p><strong>Debounce:</strong><span id="debounceMouse"></span></p>
+            <p><strong>Throttle:</strong><span id="throttleMouse"></span></p>
+        </section>
+    </body>
+</html>
