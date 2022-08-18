@@ -15,10 +15,20 @@ const multiply = (a, b) => a * b;
 const curriedMultiply = (a) => (b) => a * b;
 
 //======================================
-
 console.log(multiply(5, 3));
 console.log(curriedMultiply(5)(3));
 
 const curriedMultiplyBy5 = curriedMultiply(5);
 console.log(curriedMultiplyBy5(3));
 console.log(curriedMultiplyBy5(4));
+//======================================
+
+// Infinite currying:
+const infCurriedMultiply = (a) => {
+    return (b) => (b === undefined ? a : infCurriedMultiply(a * b));
+};
+console.log(infCurriedMultiply(5)());
+console.log(infCurriedMultiply(5)(3)());
+console.log(infCurriedMultiply(5)(3)(2)());
+console.log(infCurriedMultiply(5)(3)(2)(10)());
+console.log(infCurriedMultiply(5)(3)(2)(10)(0)());
