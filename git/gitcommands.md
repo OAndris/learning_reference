@@ -221,6 +221,24 @@ git push -u origin main
 
 `git stash clear` (delete all stashes)
 
+### Git Tag:
+
+https://devconnected.com/how-to-create-git-tags/
+
+`git tag my-tag` - Create tag (without message, only with annotation)
+
+`git tag -a my-tag -m "My message"` - Create tag with message
+
+`git tag` - List the tags
+
+`git tag -n` - List the tags, including messages
+
+`git push --tags` - Push tags to remote (aren't pushed with commits by default)
+
+`git tag <tag_name> <commit_sha>`- Create tag for a specific commit in Git history
+
+`git tag -a <tag_name> <commit_sha> -m "message"` - Create tag for a specific commit in Git history and include a message
+
 ### Other:
 
 `git fetch -p` (after fetching this "prune" flag, branches which no longer exist on the remote will also be deleted locally)
