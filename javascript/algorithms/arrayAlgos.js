@@ -1,5 +1,15 @@
 // ARRAY ALGORITHMS
 
+//==================================================================================================================
+// Helper function to allow easy comparison between pass-by-reference data types (objects, including arrays), not just primitives
+//==================================================================================================================
+function _compare(calculatedResult, expectedResult) {
+    const calcRes = typeof calculatedResult === 'object' ? JSON.stringify(calculatedResult) : calculatedResult;
+    const expectedRes = typeof expectedResult === 'object' ? JSON.stringify(expectedResult) : expectedResult;
+    const isEqual = calcRes === expectedRes;
+    console.log(isEqual, !isEqual ? ` (expected: ${expectedRes}, actual: ${calcRes})` : '');
+}
+
 //=====================
 // Given an array of integers, find its maximum / minimum value:
 //=====================
@@ -116,11 +126,44 @@ const deletePropertiesForObjectsInArray = (arr) => arr.map(({ dropKey1, dropKey2
 //     [{ x: 2 }, { x: 22 }]
 // );
 
-//==================================================================================================================
-// Helper function to allow easy comparison between pass-by-reference data types (objects, including arrays), not just primitives
-//==================================================================================================================
-function _compare(calculatedResult, expectedResult) {
-    const calcRes = typeof calculatedResult === 'object' ? JSON.stringify(calculatedResult) : calculatedResult;
-    const expectedRes = typeof expectedResult === 'object' ? JSON.stringify(expectedResult) : expectedResult;
-    console.log(calcRes === expectedRes);
-}
+//=====================
+// Find the maximum difference between a sequence of numbers. Example: [20, 18, 14, 17, 20, 21, 15] --> 7 (i.e. 21 - 14). Hint: https://realpython.com/numpy-array-programming/
+//=====================
+const findMaxDiff = (arr) => {
+    // Solution 1 (O(N^2) time complexity): iterate through the elements of the array and in each iteration, also iterate through the elements that come later in the array, checking the maximum possible difference for each element, and taking their max.
+    // Solution 2 (O(N) time complexity): iterate through the elements of the array and keep track of a running minimum of the already seen variables in every iteration (i.e. running minimum). Take the difference of the current value and the running minimum. If higher than the current maximum difference, update maxDiff.
+    let maxDiff = 0;
+    let runningMin = arr[0];
+    for (value of arr.slice(1)) {
+        maxDiff = Math.max(maxDiff, value - runningMin);
+        runningMin = Math.min(runningMin, value);
+    }
+    return maxDiff;
+};
+// _compare(findMaxDiff([20, 18, 14, 17, 20, 21, 15]), 7);
+
+//=====================
+// Given an integer, calculate the corresponding Fibonacci number. Remember: fib(n) = fib(n-1) + fib(n-2), and fib(0) == 1, fib(1) == 1. Hint: [Interview Question: Fibonacci Number](https://www.youtube.com/watch?v=Nki9hhW-tAI)
+//=====================
+const inefficientFibonacci = (n) => {
+    if (n < 0) return -1;
+    if (n === 0) return 0;
+    if (n === 1) return 1;
+    return inefficientFibonacci(n - 1) + inefficientFibonacci(n - 2);
+}; // this solution is highly inefficient because it results in a lot of duplicate, unnecessary & computationally expensive calculation --> already calculated values need to be cached
+
+const fibonacciWithCache = () => {
+    const cache = [0, 1];
+    const fibonacci = (n) => {
+        if (n < 0) return -1;
+        if (n === 0) return 0;
+        if (n === 1) return 1;
+        if (cache[n] === undefined) {
+            cache[n] = fibonacci(n - 1) + fibonacci(n - 2);
+        }
+        return cache[n];
+    };
+    return fibonacci; // a closure with a cache, making it efficient
+};
+const fibonacci = fibonacciWithCache();
+// _compare(fibonacci(8), 21);
