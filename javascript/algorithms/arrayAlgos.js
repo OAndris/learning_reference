@@ -167,3 +167,20 @@ const fibonacciWithCache = () => {
 };
 const fibonacci = fibonacciWithCache();
 // _compare(fibonacci(8), 21);
+
+//=====================
+// Shuffle an array:
+//=====================
+const shuffle = (arr) => {
+    // Implementation of the "Fisher–Yates shuffle algorithm":
+    const newArr = [...arr];
+    for (let i = 0; i < newArr.length; i++) {
+        const randomIndex = Math.floor(Math.random() * newArr.length);
+        [newArr[i], newArr[randomIndex]] = [newArr[randomIndex], newArr[i]];
+    }
+    return newArr;
+};
+// const arr = ['a', 'g', '5', { hello: 5 }, 7];
+// console.log(arr);
+// console.log(shuffle(arr));
+// console.log(arr);
