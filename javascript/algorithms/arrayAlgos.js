@@ -184,3 +184,25 @@ const shuffle = (arr) => {
 // console.log(arr);
 // console.log(shuffle(arr));
 // console.log(arr);
+
+//=====================
+// Binary search. Logarithmic time complexity, O(logN):
+//=====================
+const binarySearch = (sortedArray, item) => {
+    let lowerIdx = 0;
+    let upperIdx = sortedArray.length - 1;
+    while (lowerIdx <= upperIdx) {
+        let midIdx = Math.floor((lowerIdx + upperIdx) / 2);
+        console.log({ lowerIdx, midIdx, upperIdx });
+        if (item === sortedArray[midIdx]) {
+            return midIdx;
+        } else if (item > sortedArray[midIdx]) {
+            lowerIdx = midIdx + 1;
+        } else {
+            upperIdx = midIdx - 1;
+        }
+    }
+    return null;
+};
+_compare(binarySearch([3, 5, 6, 8, 11], 5), 1);
+_compare(binarySearch([3, 5, 6, 8, 10, 11], 10), 4);
