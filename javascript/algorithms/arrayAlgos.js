@@ -3,12 +3,12 @@
 //==================================================================================================================
 // Helper function to allow easy comparison between pass-by-reference data types (objects, including arrays), not just primitives
 //==================================================================================================================
-function _compare(calculatedResult, expectedResult) {
+module.exports = compare = (calculatedResult, expectedResult) => {
     const calcRes = typeof calculatedResult === 'object' ? JSON.stringify(calculatedResult) : calculatedResult;
     const expectedRes = typeof expectedResult === 'object' ? JSON.stringify(expectedResult) : expectedResult;
     const isEqual = calcRes === expectedRes;
     console.log(isEqual, !isEqual ? ` (expected: ${expectedRes}, actual: ${calcRes})` : '');
-}
+};
 
 //=====================
 // Given an array of integers, find its maximum / minimum value:
@@ -17,26 +17,26 @@ const findMinValueInArrayBuiltin = (arr) => Math.min(...arr);
 const findMaxValueInArrayBuiltin = (arr) => Math.max(...arr);
 const findMinValueInArray = (arr) => arr.reduce((cumRes, item) => (item < cumRes ? item : cumRes));
 const findMaxValueInArray = (arr) => arr.reduce((cumRes, item) => (item > cumRes ? item : cumRes));
-// _compare(findMinValueInArrayBuiltin([3, 2, 5, 10, 7, -5]), -5);
-// _compare(findMaxValueInArrayBuiltin([3, 2, 5, 10, 7, -5]), 10);
-// _compare(findMinValueInArray([3, 2, 5, 10, 7, -5]), -5);
-// _compare(findMaxValueInArray([3, 2, 5, 10, 7, -5]), 10);
+// compare(findMinValueInArrayBuiltin([3, 2, 5, 10, 7, -5]), -5);
+// compare(findMaxValueInArrayBuiltin([3, 2, 5, 10, 7, -5]), 10);
+// compare(findMinValueInArray([3, 2, 5, 10, 7, -5]), -5);
+// compare(findMaxValueInArray([3, 2, 5, 10, 7, -5]), 10);
 
 //=====================
 // Given an array that may contain duplicate elements, return a new array with unique elements:
 //=====================
 const uniqueValuesBuiltin = (arr) => [...new Set(arr)];
 const uniqueValues = (arr) => arr.filter((value, index, arr) => arr.indexOf(value) === index); // excludes duplicates because (arr.indexOf(value) === index) is True only for the first occurance of each unique value (lastIndexOf might also be useful)
-// _compare(uniqueValuesBuiltin([3, 2, 3, 5, 5, 10, 7, -5]), [3, 2, 5, 10, 7, -5]);
-// _compare(uniqueValues([3, 2, 3, 5, 5, 10, 7, -5]), [3, 2, 5, 10, 7, -5]);
+// compare(uniqueValuesBuiltin([3, 2, 3, 5, 5, 10, 7, -5]), [3, 2, 5, 10, 7, -5]);
+// compare(uniqueValues([3, 2, 3, 5, 5, 10, 7, -5]), [3, 2, 5, 10, 7, -5]);
 
 //=====================
 // Given an array and a value, return the number of times the value is found in the array:
 //=====================
 const countOccurance = (arr, value) => arr.filter((v) => v === value).length;
 const countOccurance2 = (arr, value) => arr.reduce((count, v) => (v === value ? count + 1 : count), 0);
-// _compare(countOccurance([3, 2, 3, 5, 5, 'js'], 5), 2);
-// _compare(countOccurance2([3, 2, 3, 5, 5, 'js'], 5), 2);
+// compare(countOccurance([3, 2, 3, 5, 5, 'js'], 5), 2);
+// compare(countOccurance2([3, 2, 3, 5, 5, 'js'], 5), 2);
 
 //=====================
 // Given an array, return an object that contains its unique elements (as keys) and the number of occurances for each (as values)
@@ -51,16 +51,16 @@ const countOccurances2 = (arr) => {
         return { ...counts, [item]: item in counts ? counts[item] + 1 : 1 };
     }, {});
 };
-// _compare(countOccurances([3, 2, 3, 5, 5, 'js']), { 2: 1, 3: 2, 5: 2, js: 1 });
-// _compare(countOccurances2([3, 2, 3, 5, 5, 'js']), { 2: 1, 3: 2, 5: 2, js: 1 });
+// compare(countOccurances([3, 2, 3, 5, 5, 'js']), { 2: 1, 3: 2, 5: 2, js: 1 });
+// compare(countOccurances2([3, 2, 3, 5, 5, 'js']), { 2: 1, 3: 2, 5: 2, js: 1 });
 
 //=====================
 // Sum values in array:
 //=====================
 const sum = (arr) => arr.reduce((cumRes, num) => cumRes + num, 0);
 const sum2 = (arr) => (arr.length === 0 ? 0 : arr[0] + sum(arr.slice(1)));
-// _compare(sum([3, 2, 3, 5, 5, 10, 7, -5]), 30);
-// _compare(sum2([3, 2, 3, 5, 5, 10, 7, -5]), 30);
+// compare(sum([3, 2, 3, 5, 5, 10, 7, -5]), 30);
+// compare(sum2([3, 2, 3, 5, 5, 10, 7, -5]), 30);
 
 //=====================
 // Given an array, reverse it:
@@ -72,14 +72,14 @@ const reverseArray = (arr) => {
         return cumRes;
     }, []);
 };
-// _compare(reverseArrayBuiltin([3, 2, 3, 5, 5, 'js']), ['js', 5, 5, 3, 2, 3]);
-// _compare(reverseArray([3, 2, 3, 5, 5, 'js']), ['js', 5, 5, 3, 2, 3]);
+// compare(reverseArrayBuiltin([3, 2, 3, 5, 5, 'js']), ['js', 5, 5, 3, 2, 3]);
+// compare(reverseArray([3, 2, 3, 5, 5, 'js']), ['js', 5, 5, 3, 2, 3]);
 
 //=====================
 // Given an array that may contain falsy values, return the non-falsy values:
 //=====================
 const removeFalsyValues = (arr) => arr.filter((value) => !!value); // NOTE: the double exclamation mark isn't strictly required, it is included only for better readability
-// _compare(removeFalsyValues([1, null, false, 'JavaScript', '', undefined, 0, 5, '0']), [1, 'JavaScript', 5, '0']);
+// compare(removeFalsyValues([1, null, false, 'JavaScript', '', undefined, 0, 5, '0']), [1, 'JavaScript', 5, '0']);
 
 //=====================
 // Given an array that contains nested array(s) with arbitrary levels of depth, return a flat array (that contains just the values from each array on every level)
@@ -95,15 +95,15 @@ const flatCustomDepth = (arr, depth = 1) => {
         return depth > 0 ? cumRes.concat(!Array.isArray(item) ? item : flatCustomDepth(item, depth - 1)) : arr;
     }, []);
 };
-// _compare(flatCustomDepthBuiltin([1, 2, 3, [4, [5, 6, [7, 8, [9]]]]], (depth = Infinity)), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
-// _compare(flatInfiniteDepth([1, 2, 3, [4, [5, 6, [7, 8, [9]]]]]), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
-// _compare(flatCustomDepth([1, 2, 3, [4, [5, 6, [7, 8, [9]]]]], (depth = Infinity)), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+// compare(flatCustomDepthBuiltin([1, 2, 3, [4, [5, 6, [7, 8, [9]]]]], (depth = Infinity)), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+// compare(flatInfiniteDepth([1, 2, 3, [4, [5, 6, [7, 8, [9]]]]]), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+// compare(flatCustomDepth([1, 2, 3, [4, [5, 6, [7, 8, [9]]]]], (depth = Infinity)), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 //=====================
 // Keep only certain key-value pairs in an array of objects:
 //=====================
 const keepPropertiesForObjectsInArray = (arr) => arr.map(({ keepKey1, keepKey2 }) => ({ keepKey1, keepKey2 }));
-// _compare(
+// compare(
 //     keepPropertiesForObjectsInArray([
 //         { keepKey1: 1, x: 2, keepKey2: 3 },
 //         { keepKey1: 11, x: 22, keepKey2: 33 },
@@ -118,7 +118,7 @@ const keepPropertiesForObjectsInArray = (arr) => arr.map(({ keepKey1, keepKey2 }
 // Delete certain key-value pairs in an array of objects:
 //=====================
 const deletePropertiesForObjectsInArray = (arr) => arr.map(({ dropKey1, dropKey2, ...keepKeys }) => keepKeys);
-// _compare(
+// compare(
 //     deletePropertiesForObjectsInArray([
 //         { dropKey1: 1, x: 2, dropKey2: 3 },
 //         { dropKey1: 11, x: 22, dropKey2: 33 },
@@ -140,7 +140,7 @@ const findMaxDiff = (arr) => {
     }
     return maxDiff;
 };
-// _compare(findMaxDiff([20, 18, 14, 17, 20, 21, 15]), 7);
+// compare(findMaxDiff([20, 18, 14, 17, 20, 21, 15]), 7);
 
 //=====================
 // Given an integer, calculate the corresponding Fibonacci number. Remember: fib(n) = fib(n-1) + fib(n-2), and fib(0) == 1, fib(1) == 1. Hint: [Interview Question: Fibonacci Number](https://www.youtube.com/watch?v=Nki9hhW-tAI)
@@ -166,7 +166,7 @@ const fibonacciWithCache = () => {
     return fibonacci; // a closure with a cache, making it efficient
 };
 const fibonacci = fibonacciWithCache();
-// _compare(fibonacci(8), 21);
+// compare(fibonacci(8), 21);
 
 //=====================
 // Shuffle an array:
@@ -184,25 +184,3 @@ const shuffle = (arr) => {
 // console.log(arr);
 // console.log(shuffle(arr));
 // console.log(arr);
-
-//=====================
-// Binary search. Logarithmic time complexity, O(logN):
-//=====================
-const binarySearch = (sortedArray, item) => {
-    let lowerIdx = 0;
-    let upperIdx = sortedArray.length - 1;
-    while (lowerIdx <= upperIdx) {
-        let midIdx = Math.floor((lowerIdx + upperIdx) / 2);
-        console.log({ lowerIdx, midIdx, upperIdx });
-        if (item === sortedArray[midIdx]) {
-            return midIdx;
-        } else if (item > sortedArray[midIdx]) {
-            lowerIdx = midIdx + 1;
-        } else {
-            upperIdx = midIdx - 1;
-        }
-    }
-    return null;
-};
-_compare(binarySearch([3, 5, 6, 8, 11], 5), 1);
-_compare(binarySearch([3, 5, 6, 8, 10, 11], 10), 4);
